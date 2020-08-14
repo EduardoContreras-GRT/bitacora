@@ -64,25 +64,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <!--<div class="profile-bg"></div>-->
                 <ul class="list-unstyled components">
-                    <li class="active">
+                    <li id="dash" class="active">
                         <a href="#" onclick="changePage('dash');">
                             <i class="fas fa-home"></i>
                             Home
                         </a>
                     </li>
-                    <li>
+                    <li id="leads">
                         <a href="#" onclick="changePage('leads');">
                             <i class="fas fa-globe"></i>
                             Leads
                         </a>
                     </li>
-                    <li>
+                    <li id=citas>
                         <a href="#" onclick="changePage('citas');">
                             <i class="fas fa-calendar"></i>
                             Citas
                         </a>
                     </li>
-                    <li>
+                    <li id="seguimiento">
                         <a href="#" onclick="changePage('seguimiento');">
                             <i class="fas fa-edit"></i>
                             Seguimiento
@@ -95,52 +95,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <i class="fas fa-angle-down fa-pull-right"></i>
                         </a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
-                            <li>
+                            <li id="agencias">
                                 <a href="#" onclick="changePage('agencias');">Agencias</a>
                             </li>
-                            <li>
+                            <li id="asesores">
                                 <a href="#" ononclick="changePage('asesores');">Asesores</a>
                             </li>
-                            <li>
+                            <li id="cam-leads">
                                 <a href="#" onclick="changePage('cam-leads');">Campa&ntilde;as de Lead</a>
                             </li>
-                            <li>
+                            <li id="eta-citas">
                                 <a href="#" onclick="changePage('eta-citas');">Etapas de Citas</a>
                             </li>
-                            <li>
+                            <li id="eta-leads">
                                 <a href="#" onclick="changePage('eta-leads');">Etapas de Lead</a>
                             </li>
-                            <li>
+                            <li id="eta-seguimientos">
                                 <a href="#" onclick="changePage('eta-seguimientos');">Etapas de Seguimientos</a>
                             </li>
-                            <li>
+                            <li id="for-compra">
                                 <a href="#" onclick="changePage('for-compra');">Forma de Compra</a>
                             </li>
-                            <li>
+                            <li id="fue-lead">
                                 <a href="#" onclick="changePage('fue-lead');">Fuentes de Lead</a>
                             </li>
-                            <li>
+                            <li id="guiones">
                                 <a href="#" onclick="changePage('guiones');">Guiones</a>
                             </li>
-                            <li>
+                            <li id="tip-temperatura">
                                 <a href="#" onclick="changePage('tip-temperatura');">Temperatura</a>
                             </li>
-                            <li>
+                            <li id="tip-asesores">
                                 <a href="#" onclick="changePage('tip-asesores');">Tipos de asesores</a>
                             </li>
-                            <li>
+                            <li id="tip-plantillas-guiones">
                                 <a href="#" onclick="changePage('tip-plantillas-guiones');">Tipos de Plantillas Guiones</a>
                             </li>
-                            <li>
+                            <li id="tip-seguimientos">
                                 <a href="#" onclick="changePage('tip-seguimientos');">Tipos de seguimientos</a>
                             </li>
-                            <li>
+                            <li id="usuarios">
                                 <a href="#" onclick="changePage('usuarios');">Usuarios</a>
                             </li>
-                            <li>
+                            <li id="veh-modelos">
                                 <a href="#" onclick="changePage('veh-modelos');">Veh&iacute;culos - modelos</a>
                             </li>
-                            <li>
+                            <li id="veh-versiones">
                                 <a href="#" onclick="changePage('veh-versiones');">Versiones - veh&iacute;culos</a>
                             </li>
                         </ul>
@@ -282,296 +282,82 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                 </nav>
                 <!--// top-bar -->
-                <div id="divContainer">
+                <div id="divContainer" class="container-fluid">
 
                 </div>
               
                 <!-- Copyright -->
-                <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
+               <!--  <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
                     <p>© 2018  GrahamRoss Training . All Rights Reserved
                     </p>
-                </div>
+                </div>-->
                 <!--// Copyright -->
             </div>
         </div>
 
-
         <!-- Required common Js -->
         <script src='assets/js/jquery-2.2.3.min.js'></script>
         <!-- //Required common Js -->
-
         <!-- loading-gif Js -->
         <script src="assets/js/modernizr.js"></script>
-        <script>
-            //paste this code under head tag or in a seperate js file.
-            // Wait for window load
-            $(window).load(function () {
-                // Animate loader off screen
-                $(".se-pre-con").fadeOut("slow");
-                ;
-            });
-        </script>
         <!--// loading-gif Js -->
-
-        <!-- Sidebar-nav Js -->
-        <script>
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-            });
-        </script>
-        <!--// Sidebar-nav Js -->
-
         <!-- Graph -->
-        <script src="assets/assets/js/SimpleChart.js"></script>
-
-        <script>
-
-            changePage = function (page){
-                console.log(page);
-            };
-
-        </script>
-
-
-        <script>
-            var graphdata4 = {
-                linecolor: "Random",
-                title: "Thursday",
-                values: [{
-                        X: "6",
-                        Y: 300.00
-                    },
-                    {
-                        X: "7",
-                        Y: 101.98
-                    },
-                    {
-                        X: "8",
-                        Y: 140.00
-                    },
-                    {
-                        X: "9",
-                        Y: 340.00
-                    },
-                    {
-                        X: "10",
-                        Y: 470.25
-                    },
-                    {
-                        X: "11",
-                        Y: 180.56
-                    },
-                    {
-                        X: "12",
-                        Y: 680.57
-                    },
-                    {
-                        X: "13",
-                        Y: 740.00
-                    },
-                    {
-                        X: "14",
-                        Y: 800.89
-                    },
-                    {
-                        X: "15",
-                        Y: 420.57
-                    },
-                    {
-                        X: "16",
-                        Y: 980.24
-                    },
-                    {
-                        X: "17",
-                        Y: 1080.00
-                    },
-                    {
-                        X: "18",
-                        Y: 140.24
-                    },
-                    {
-                        X: "19",
-                        Y: 140.58
-                    },
-                    {
-                        X: "20",
-                        Y: 110.54
-                    },
-                    {
-                        X: "21",
-                        Y: 480.00
-                    },
-                    {
-                        X: "22",
-                        Y: 580.00
-                    },
-                    {
-                        X: "23",
-                        Y: 340.89
-                    },
-                    {
-                        X: "0",
-                        Y: 100.26
-                    },
-                    {
-                        X: "1",
-                        Y: 1480.89
-                    },
-                    {
-                        X: "2",
-                        Y: 1380.87
-                    },
-                    {
-                        X: "3",
-                        Y: 1640.00
-                    },
-                    {
-                        X: "4",
-                        Y: 1700.00
-                    }
-                ]
-            };
-            $(function () {
-                $("#Hybridgraph").SimpleChart({
-                    ChartType: "Hybrid",
-                    toolwidth: "50",
-                    toolheight: "25",
-                    axiscolor: "#E6E6E6",
-                    textcolor: "#6E6E6E",
-                    showlegends: false,
-                    data: [graphdata4],
-                    legendsize: "140",
-                    legendposition: 'bottom',
-                    xaxislabel: 'Hours',
-                    title: 'Weekly Profit',
-                    yaxislabel: 'Profit in $'
-                });
-            });
-        </script>
-        <!--// Graph -->
+        <script src="assets/js/SimpleChart.js"></script>
         <!-- Bar-chart -->
         <script src="assets/js/rumcaJS.js"></script>
         <script src="assets/js/example.js"></script>
         <!--// Bar-chart -->
         <!-- Calender -->
         <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/pignose.calender.js"></script>
-        <script>
-            //<![CDATA[
-            $(function () {
-                $('.calender').pignoseCalender({
-                    select: function (date, obj) {
-                        obj.calender.parent().next().show().text('You selected ' +
-                                (date[0] === null ? 'null' : date[0].format('YYYY-MM-DD')) +
-                                '.');
-                    }
-                });
-
-                $('.multi-select-calender').pignoseCalender({
-                    multiple: true,
-                    select: function (date, obj) {
-                        obj.calender.parent().next().show().text('You selected ' +
-                                (date[0] === null ? 'null' : date[0].format('YYYY-MM-DD')) +
-                                '~' +
-                                (date[1] === null ? 'null' : date[1].format('YYYY-MM-DD')) +
-                                '.');
-                    }
-                });
-            });
-            //]]>
-        </script>
+        <script src="assets/js/pignose.calender.js"></script> 
         <!--// Calender -->
-
         <!-- profile-widget-dropdown js-->
         <script src="assets/js/script.js"></script>
         <!--// profile-widget-dropdown js-->
-
         <!-- Count-down -->
         <script src="assets/js/simplyCountdown.js"></script>
         <link href="assets/css/simplyCountdown.css" rel='stylesheet' type='text/css' />
-        <script>
-            var d = new Date();
-            simplyCountdown('simply-countdown-custom', {
-                year: d.getFullYear(),
-                month: d.getMonth() + 2,
-                day: 25
-            });
-        </script>
-        <!--// Count-down -->
-
-        <!-- pie-chart -->
-        <script src='assets/js/amcharts.js'></script>
-        <script>
-            var chart;
-            var legend;
-
-            var chartData = [{
-                    country: "Lithuania",
-                    value: 260
-                },
-                {
-                    country: "Ireland",
-                    value: 201
-                },
-                {
-                    country: "Germany",
-                    value: 65
-                },
-                {
-                    country: "Australia",
-                    value: 39
-                },
-                {
-                    country: "UK",
-                    value: 19
-                },
-                {
-                    country: "Latvia",
-                    value: 10
-                }
-            ];
-
-            AmCharts.ready(function () {
-                // PIE CHART
-                chart = new AmCharts.AmPieChart();
-                chart.dataProvider = chartData;
-                chart.titleField = "country";
-                chart.valueField = "value";
-                chart.outlineColor = "";
-                chart.outlineAlpha = 0.8;
-                chart.outlineThickness = 2;
-                // this makes the chart 3D
-                chart.depth3D = 20;
-                chart.angle = 30;
-
-                // WRITE
-                chart.write("chartdiv");
-            });
-        </script>
-        <!--// pie-chart -->
-
-        <!-- dropdown nav -->
-        <script>
-            $(document).ready(function () {
-                $(".dropdown").hover(
-                        function () {
-                            $('.dropdown-menu', this).stop(true, true).slideDown("fast");
-                            $(this).toggleClass('open');
-                        },
-                        function () {
-                            $('.dropdown-menu', this).stop(true, true).slideUp("fast");
-                            $(this).toggleClass('open');
-                        }
-                );
-            });
-        </script>
-        <!-- //dropdown nav -->
-
+        <script src='assets/js/amcharts.js'></script>    
         <!-- Js for bootstrap working-->
         <script src="assets/js/bootstrap.min.js"></script>
-        <!-- //Js for bootstrap working -->
+
+        <script>
+
+            changePage = function (page){
+                console.log(page);
+
+                $("#divContainer").html();
+
+                $(".active").removeClass("active");
+                $("#"+page).addClass("nav-item active");
+                $("#divContainer").load( "forms/" + page + ".html?" + new Date().getTime(), function() {                   
+                });
+
+            };            
+            
+            
+            $(document).ready(function () {
+                $(".dropdown").hover(
+                    function () {
+                        $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                        $(this).toggleClass('open');
+                    },
+                    function () {
+                        $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                        $(this).toggleClass('open');
+                    }
+                );
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+
+                $(".se-pre-con").fadeOut("slow");
+           
+            });
+
+        </script>
+
 
     </body>
 
