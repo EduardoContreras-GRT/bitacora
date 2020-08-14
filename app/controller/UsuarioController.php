@@ -1,9 +1,10 @@
 <?php
-include_once '../model/UsuariosModel.Class.php';
+include_once '../model/UsuarioModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
 @$IdUsuarios = $_POST["IdUsuarios"];
+@$Nombre = $_POST["Nombre"];
 @$Usuario = $_POST["Usuario"];
 @$Password = $_POST["Password"];
 @$PasswordEncrip = $_POST["PasswordEncrip"];
@@ -36,14 +37,14 @@ switch($action){
     break;
 
     case "select":
-        $tables = "Usuarios";
+        $tables = "usuario";
         $fields = "*";
         $where  = "";
         echo $UsuariosModel->selectUsuario($tables, $fields, $where);
     break;
 
     case "selectCombo":
-        $tables = "Usuarios";
+        $tables = "usuario";
         $fields = "*";
         $where  = "";
         echo $UsuariosModel->selectUsuario($tables, $fields, $where);
