@@ -10,7 +10,7 @@
 	    case "serchUser":
 	        $tables = "usuario";
 	        $fields = " Nombre, IdUsuarios";
-	        $where  = " Usuario='" . $user . "' AND PasswordEncrip='" . sha1($psw) . "' AND Activo='S' ";
+	        $where  = " Usuario ='" . $user . "' AND PasswordEncrip='" . sha1($psw) . "' AND Activo='S' ";
 			$var = json_decode($LoginModel->serchUser($tables, $fields, $where), true);		
 	        $var2=$var['data'];
 	        if($var['total'] != "0"){
@@ -18,11 +18,11 @@
 				session_start();	
 				$_SESSION["user"] = $var2[0]['IdUsuarios'];
 				$_SESSION["name"] = $var2[0]['Usuario'];
-				print "<meta http-equiv='refresh' content='0;url=../../main.php'>";
+				print "<meta http-equiv='refresh' content='0;url=../main.php'>";
 			}else{
 
 				$msg="Usuario y/o contraseña incorrectos favor de verificar";
-				print "<meta http-equiv='refresh' content='0;url=../../index.html?msg=" . $msg . "'>";		
+				print "<meta http-equiv='refresh' content='0;url=../../index.php?msg=" . $msg . "'>";		
 			}   
 	    break;
 
