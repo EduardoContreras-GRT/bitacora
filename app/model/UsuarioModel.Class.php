@@ -4,7 +4,7 @@ include_once dirname(__FILE__) . '/../lib/connect/Connect.php';
 class UsuariosModel{
 
    
-    private $table = "Usuarios";
+    private $table = "usuario";
     private $data = "";
     private $fields = "";
     private $where = "";
@@ -17,7 +17,7 @@ class UsuariosModel{
 
     public function insertUsuario($data = []){
         $this->data = $data;
-        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "IdUsuario"];
+        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "IdUsuarios"];
         $Connection = new Connect();
         return $Connection->insert($dataArray);
     }
