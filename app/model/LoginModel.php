@@ -1,8 +1,8 @@
 <?php 
-include_once '../../lib/Connect.php';
+include_once '../lib/connect/Connect.php';
 	class LoginModel
 	{
-		private $table = "Usuarios";
+		private $table = "usuario";
 	    private $data = "";
 	    private $fields = "";
 	    private $where = "";
