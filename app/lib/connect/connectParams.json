@@ -1,0 +1,26 @@
+[
+        {
+        "sae" : {
+            "host" : "localhost",
+            "user" : "grtmx_sae",
+            "password" : "3v3nT0sW3b_",
+            "database" : "grtmx_sae_web",
+            "port" : "3306"
+        },
+        "sae-local" : {
+            "host" : "127.0.0.1",
+            "user" : "root",
+            "password" : "Jesus1216",
+            "database" : "grtmx_sae_web",
+            "port" : "3306"
+        },        
+        "facturacion" : {
+            "host" : "127.0.0.1",
+            "user" : "factu",
+            "password" : "654321",
+            "database" : "grtmx_facturacion",
+            "port" : "3306"
+        }
+
+    }
+]
