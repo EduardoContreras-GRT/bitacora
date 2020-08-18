@@ -96,52 +96,52 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li id="agencias">
-                                <a href="#" onclick="changePage('agencias');">Agencias</a>
+                                <a href="#" onclick="changePage('agencias','cat');">Agencias</a>
                             </li>
                             <li id="asesores">
-                                <a href="#" ononclick="changePage('asesores');">Asesores</a>
+                                <a href="#" onclick="changePage('asesores','cat');">Asesores</a>
                             </li>
                             <li id="cam-leads">
-                                <a href="#" onclick="changePage('cam-leads');">Campa&ntilde;as de Lead</a>
+                                <a href="#" onclick="changePage('cam-leads','cat');">Campa&ntilde;as de Lead</a>
                             </li>
                             <li id="eta-citas">
-                                <a href="#" onclick="changePage('eta-citas');">Etapas de Citas</a>
+                                <a href="#" onclick="changePage('eta-citas','cat');">Etapas de Citas</a>
                             </li>
                             <li id="eta-leads">
-                                <a href="#" onclick="changePage('eta-leads');">Etapas de Lead</a>
+                                <a href="#" onclick="changePage('eta-leads','cat');">Etapas de Lead</a>
                             </li>
                             <li id="eta-seguimientos">
-                                <a href="#" onclick="changePage('eta-seguimientos');">Etapas de Seguimientos</a>
+                                <a href="#" onclick="changePage('eta-seguimientos','cat');">Etapas de Seguimientos</a>
                             </li>
                             <li id="for-compra">
-                                <a href="#" onclick="changePage('for-compra');">Forma de Compra</a>
+                                <a href="#" onclick="changePage('for-compra','cat');">Forma de Compra</a>
                             </li>
                             <li id="fue-lead">
-                                <a href="#" onclick="changePage('fue-lead');">Fuentes de Lead</a>
+                                <a href="#" onclick="changePage('fue-lead','cat');">Fuentes de Lead</a>
                             </li>
                             <li id="guiones">
-                                <a href="#" onclick="changePage('guiones');">Guiones</a>
+                                <a href="#" onclick="changePage('guiones','cat');">Guiones</a>
                             </li>
                             <li id="tip-temperatura">
-                                <a href="#" onclick="changePage('tip-temperatura');">Temperatura</a>
+                                <a href="#" onclick="changePage('tip-temperatura','cat');">Temperatura</a>
                             </li>
                             <li id="tip-asesores">
-                                <a href="#" onclick="changePage('tip-asesores');">Tipos de asesores</a>
+                                <a href="#" onclick="changePage('tip-asesores','cat');">Tipos de asesores</a>
                             </li>
                             <li id="tip-plantillas-guiones">
-                                <a href="#" onclick="changePage('tip-plantillas-guiones');">Tipos de Plantillas Guiones</a>
+                                <a href="#" onclick="changePage('tip-plantillas-guiones','cat');">Tipos de Plantillas Guiones</a>
                             </li>
                             <li id="tip-seguimientos">
-                                <a href="#" onclick="changePage('tip-seguimientos');">Tipos de seguimientos</a>
+                                <a href="#" onclick="changePage('tip-seguimientos','cat');">Tipos de seguimientos</a>
                             </li>
                             <li id="usuarios">
-                                <a href="#" onclick="changePage('usuarios');">Usuarios</a>
+                                <a href="#" onclick="changePage('usuarios','cat');">Usuarios</a>
                             </li>
                             <li id="veh-modelos">
-                                <a href="#" onclick="changePage('veh-modelos');">Veh&iacute;culos - modelos</a>
+                                <a href="#" onclick="changePage('veh-modelos','cat');">Veh&iacute;culos - modelos</a>
                             </li>
                             <li id="veh-versiones">
-                                <a href="#" onclick="changePage('veh-versiones');">Versiones - veh&iacute;culos</a>
+                                <a href="#" onclick="changePage('veh-versiones','cat');">Versiones - veh&iacute;culos</a>
                             </li>
                         </ul>
                     </li>                                        
@@ -297,6 +297,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <!-- Required common Js -->
         <script src='assets/js/jquery-2.2.3.min.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+     
         <!-- //Required common Js -->
         <!-- loading-gif Js -->
         <script src="assets/js/modernizr.js"></script>
@@ -321,16 +323,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- Js for bootstrap working-->
         <script src="assets/js/bootstrap.min.js"></script>
 
+        <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+        <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
+  
+
         <script>
 
-            changePage = function (page){
+            changePage = function (page, tipo = ""){
                 console.log(page);
-
+                var url = "forms/";
                 $("#divContainer").html();
 
                 $(".active").removeClass("active");
                 $("#"+page).addClass("nav-item active");
-                $("#divContainer").load( "forms/" + page + ".html?" + new Date().getTime(), function() {                   
+                
+                url += (tipo=="")? page + ".php?" : "cat/" + page + ".php?";
+
+                $("#divContainer").load( url + new Date().getTime(), function() {                   
                 });
 
             };            

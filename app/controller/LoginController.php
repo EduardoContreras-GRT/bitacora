@@ -18,7 +18,7 @@
 				session_start();	
 				$_SESSION["user"] = $var2[0]['IdUsuarios'];
 				$_SESSION["name"] = $var2[0]['Usuario'];
-				print "<meta http-equiv='refresh' content='0;url=../main.php'>";
+				print "<meta http-equiv='refresh' content='0;url=app/main.php'>";
 			}else{
 
 				$msg="Usuario y/o contraseña incorrectos favor de verificar";

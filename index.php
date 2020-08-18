@@ -6,15 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
+   
 
     <link href="app/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="app/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -53,12 +45,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Login</button>
-                </form>
-
-               
-
-
-
+                </form>      
             </div>
             <!-- Copyright -->
             <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
@@ -85,10 +72,6 @@
                     $msg=$_REQUEST['msg'];
                     echo $msg;
                   }
-                  else
-                  {
-                    
-                  }
                 ?>
               </p>
             </div>
@@ -104,6 +87,17 @@
 
     <script src='app/assets/js/jquery-2.2.3.min.js'></script>
     <script src="app/assets/js/bootstrap.min.js"></script>
+
+
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
     
     <?php
       if(isset($_REQUEST['msg'])) {
@@ -114,13 +108,7 @@
         echo"    })";                             
         echo"</script>";
       }
-      else
-      {
-
-      }
     ?>
-
 </body>
-
 
 </html>
