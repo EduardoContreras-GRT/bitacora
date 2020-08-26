@@ -13,6 +13,7 @@
                 <label for="nombre">Nombre del Asesor</label>
                 <input type="text" class="form-control" id="nombre">
             </div>
+            <!--
             <div class="form-group">
                 <label for="apellidoPaterno">Apellido Paterno</label>
                 <input type="text" class="form-control" id="apellidoPaterno">
@@ -28,10 +29,13 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-secondary btn-group-lg">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-dark btn-group-lg">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>     
+                <button type="button" value="Guardar" id="btnGuardar"  data-toggle="modal" data-target="#modalFrmAsesores" class="btn btn-dark btn-group-lg">Agregar</button>
+                   
             </div>
         </form>
     </div>
@@ -58,6 +62,7 @@
                         <label for="nombre" class="form-control-label">Nombre de Asesor</label>
                         <input class="form-control" type="text" value="" id="nombre">
                     </div>
+                    
                     <div class="col-lg-6 col-md-6">
                     <label for="apellidoMaterno" class="form-control-label">Apellido Materno</label>
                         <input class="form-control" type="text" value="" id="nombre">
@@ -65,14 +70,24 @@
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno" class="form-control-label">Estatus</label>
-                    <input class="form-control" type="text" value="" id="PrimerNombre">
+                    <label for="apellidoPaterno" class="form-control-label">apellido Paterno</label>
+                    <input class="form-control" type="text" value="" id="apellidoPaterno">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
-                    <label for="SegundoNombre" class="form-control-label">Tipo Asesor</label>
-                    <input class="form-control" type="text" value="" id="SegundoNombre">
+                    <label for="activo" class="form-control-label">Estatus</label>
+                    <input class="form-control" type="text" value="" id="activo">
                 </div>                         
-            </div>                                                                                                                                        
+            </div>   
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <label for="tipoAsesor" class="form-control-label">Tipo Asesor</label>
+                    <input class="form-control" type="text" value="" id="tipoAsesor">
+                </div>                         
+                <div class="col-lg-6 col-md-6">
+                    <label for="Agencias_idAgencia" class="form-control-label">Agencia</label>
+                    <input class="form-control" type="text" value="" id="Agencias_idAgencia">
+                </div>                         
+            </div>                                                                                                                                      
                                             
             </form>           
         </div>
@@ -88,7 +103,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmAsesoresEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmAsesoresEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmAsesoresEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmAsesoresEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -194,6 +209,8 @@
             data: { 
                 action: "selectByName", 
                 nombre: nombre
+              //  apellidoPaterno: apellidoPaterno,
+               // apellidoMaterno: apellidoMaterno
 
             },
             dataType: "json"
@@ -228,10 +245,12 @@
 
         $.ajax({
                 method: "POST",
-                url: "controller/AsesoresController.php",            
+                url: "controller/AsesorController.php",            
                 data: { 
                     action: "insert",                         
-                    Nombre: Nombre                                                                                
+                    nombre: nombre,
+                    apellidoPaterno: apellidoPaterno,
+                    apellidoMaterno: apellidoMaterno                                                                                
                 },
                 dataType: "json"
         })

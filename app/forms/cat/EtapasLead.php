@@ -13,6 +13,7 @@
                 <label for="nombreEtapa">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapa" >
             </div>
+            <!--
             <div class="form-group">
                 <label for="descripcionEtapa">Descripcion</label>
                 <input type="text" class="form-control" id="descripcionEtapa" >
@@ -21,7 +22,7 @@
                 <label for="orden">Orden</label>
                 <input type="text" class="form-control" id="orden" >
             </div>
-            
+
             <div class="form-group">
                 <label for="activo">Activo</label>
                 <select class="form-control" id="activo">
@@ -29,10 +30,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+            -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasLead">Agregar</button>
+                            
             </div>
         </form>
         </div>
@@ -92,7 +95,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmEtapasLeadEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasLeadEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmEtapasLeadEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasLeadEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

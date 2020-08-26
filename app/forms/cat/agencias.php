@@ -23,6 +23,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">  
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchAgencia()">Buscar</button>
                 <button type="button" class="btn btn-dark btn-group-lg"  value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>   
             </div>
         </form>
     </div>
@@ -149,7 +150,7 @@ getAgencias = function(){
             html += '<td>'; 
             html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmAgencias" ><i class="fas fa-edit"></i></button>'
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger btn-delete" data-toggle="modal" data-target="#modalFrmAgenciasEliminar"><i class="fas fa-trash"></i></button>'    
+            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger " data-toggle="modal" data-target="#modalFrmAgenciasEliminar"><i class="fas fa-trash"></i></button>'    
             
            // html += '<td>';
           // html += '<td class="text-right">';

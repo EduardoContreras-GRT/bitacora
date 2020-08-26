@@ -13,6 +13,7 @@
                 <label for="nombreEtapa">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapa" >
             </div>
+            <!--
             <div class="form-group">
                 <label for="descripcionEtapa">Descripción</label>
                 <input type="text" class="form-control" id="descripcionEtapa" >
@@ -29,10 +30,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-secondary btn-group-lg">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button>
+                       
             </div>
         </form>
     </div>
@@ -93,7 +96,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmEtapasCitasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasCitasEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmEtapasCitasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasCitasEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

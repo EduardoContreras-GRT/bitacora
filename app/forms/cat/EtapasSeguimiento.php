@@ -22,9 +22,10 @@
                 </select>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasSeguimientos()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasSeguimientos()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento">Agregar</button>
+                         
             </div>
         </form>
         </div>
@@ -74,7 +75,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmEtapasSeguimientoEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasSeguimientoEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmEtapasSeguimientoEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasSeguimientoEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
