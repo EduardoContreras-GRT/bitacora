@@ -10,7 +10,7 @@
         <form>
             <input type="hidden" class="form-control" id="idAsesor">
             <div class="form-group">
-                <label for="nombre">Nombre del Asesor</label>
+                <label for="nombre">Nombre del asesor</label>
                 <input type="text" class="form-control" id="nombre">
             </div>
             <!--
@@ -59,18 +59,18 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombre" class="form-control-label">Nombre de Asesor</label>
+                        <label for="nombre" class="form-control-label">Nombre de asesor</label>
                         <input class="form-control" type="text" value="" id="nombre">
                     </div>
                     
                     <div class="col-lg-6 col-md-6">
-                    <label for="apellidoMaterno" class="form-control-label">Apellido Materno</label>
+                    <label for="apellidoMaterno" class="form-control-label">Apellido materno</label>
                         <input class="form-control" type="text" value="" id="nombre">
                     </div>                         
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno" class="form-control-label">apellido Paterno</label>
+                    <label for="apellidoPaterno" class="form-control-label">apellido paterno</label>
                     <input class="form-control" type="text" value="" id="apellidoPaterno">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
