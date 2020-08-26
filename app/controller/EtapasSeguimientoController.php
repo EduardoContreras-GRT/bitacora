@@ -1,5 +1,6 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+
+include_once '../model/EtapasSeguimiento.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -15,33 +16,41 @@ switch($action){
 
     case "insert":              
         $dataArray = buildArray($_POST);      
-        echo $EtapasSeguimientoModel->inserEtapasSeguimiento($dataArray);        
+        echo $EtapasSeguimientoModel->insertEtapasSeguimiento($dataArray);        
     break;
     
     case "update":
         $dataArray = buildArrayUpdate($_POST, "idEtapaSeguimiento");
         $idValuesArray = ["idField" => "idEtapaSeguimiento", "idValue" => $idEtapaSeguimiento];
-        echo $EtapasSeguimiento->updateEtapasSeguimiento($dataArray, $idValuesArray);
+        echo $EtapasSeguimientoModel->updateEtapasSeguimiento($dataArray, $idValuesArray);
     break;
     
     case "delete":
         $idValuesArray = ["idField" => "idEtapaSeguimiento", "idValue" => $idEtapaSeguimiento];
-        echo $EtapasSeguimiento->deleteEtapasSeguimiento($idValuesArray);
+        echo $EtapasSeguimientoModel->deleteEtapasSeguimiento($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "etapasseguimientos";
         $fields = "*";
         $where  = "";
-        echo $EtapasSeguimiento->selectEtapasSeguimiento($tables, $fields, $where);
+        echo $EtapasSeguimientoModel->selectEtapasSeguimiento($tables, $fields, $where);
     break;
 
     case "selectCombo":
         $tables = "etapasseguimientos";
         $fields = "*";
         $where  = "";
-        echo $EtapasSeguimiento->selectEtapasSeguimiento($tables, $fields, $where);
+        echo $EtapasSeguimientoModel->selectEtapasSeguimiento($tables, $fields, $where);
     break;
+
+    case "selectByName":
+        $tables = "etapasseguimientos";
+        $fields = "*";
+        $where  =" nombreEtapaSeguimiento='" . $nombreEtapaSeguimiento . "'";
+        echo $EtapasSeguimientoModel->selectEtapasSeguimiento($tables, $fields, $where);
+    break;
+
 
 }
 

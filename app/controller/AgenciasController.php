@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/AgenciasModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -14,9 +14,17 @@ $AgenciasModel = new AgenciasModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
-        echo $AgenciasModel->insertAgencias($dataArray);        
+    case "insert":      
+      $dataArray = [
+            "Nombre" => $Nombre,
+            "Activo" => "S" 
+       ]; 
+      //  echo $AgenciasModel->insertAgencias($dataArray); 
+      //echo $Nombre;
+     // var_dump($_POST);
+  
+        // $dataArray = buildArray($_POST);      
+         echo $AgenciasModel->insertAgencias($dataArray);        
     break;
     
     case "update":
@@ -30,7 +38,7 @@ switch($action){
         echo $AgenciasModel->deleteAgencias($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "agencias";
         $fields = "*";
         $where  = "";
@@ -43,6 +51,15 @@ switch($action){
         $where  = "";
         echo $AgenciasModel->selectAgencias($tables, $fields, $where);
     break;
+
+    case "selectByName":
+        $tables = "agencias";
+        $fields = "*";
+        $where  = " Nombre='" . $Nombre . "'";
+        echo $AgenciasModel->selectAgencias($tables, $fields, $where);
+    break;
+
+    
 
 }
 

@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/FuenteLeadModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -29,7 +29,7 @@ switch($action){
         echo $FuentesLeadModel->deleteFuentesLead($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "fuenteslead";
         $fields = "*";
         $where  = "";
@@ -42,6 +42,14 @@ switch($action){
         $where  = "";
         echo $FuentesLeadModel->selectFuentesLead($tables, $fields, $where);
     break;
+    
+    case "selectByName":
+        $tables = "fuenteslead";
+        $fields = "*";
+        $where  =" nombreFuente='" . $nombreFuente . "'";
+        echo $FuentesLeadModel->selectFuentesLead($tables, $fields, $where);
+    break;
+
 
 }
 

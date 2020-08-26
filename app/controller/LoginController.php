@@ -15,10 +15,11 @@
 	        $var2=$var['data'];
 	        if($var['total'] != "0"){
 				$msg="Usuario encontrado";			
-				session_start();	
+				session_start();
+				//var_dump($var2);
 				$_SESSION["user"] = $var2[0]['IdUsuarios'];
-				$_SESSION["name"] = $var2[0]['Usuario'];
-				print "<meta http-equiv='refresh' content='0;url=app/main.php'>";
+				$_SESSION["name"] = $var2[0]['Nombre'];
+				print "<meta http-equiv='refresh' content='0;url=../main.php'>";
 			}else{
 
 				$msg="Usuario y/o contraseña incorrectos favor de verificar";

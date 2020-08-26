@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/TemperaturasModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -29,7 +29,7 @@ switch($action){
         echo $TemperaturaModel->deleteTemperatura($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "temperaturaslead";
         $fields = "*";
         $where  = "";
@@ -41,6 +41,12 @@ switch($action){
         $fields = "*";
         $where  = "";
         echo $TemperaturaModel->selectTemperatura($tables, $fields, $where);
+    break;
+    case "selectByName":
+        $tables = "Temperaturaslead";
+        $fields = "*";
+        $where  =" nombreTemperatura='" . $nombreTemperatura . "'";
+       echo $TemperaturaModel->selectTemperatura($tables, $fields, $where);
     break;
 
 }

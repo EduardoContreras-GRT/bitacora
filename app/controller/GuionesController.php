@@ -1,12 +1,15 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/GuionesModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
-@$idTipoPlantillaGuion = $_POST["idTipoPlantillaGuion"];
-@$nombreTiposPlantillaGuion = $_POST["nombreTiposPlantillaGuion"];
+@$idPlantillaGuion = $_POST["idPlantillaGuion"];
+@$nombrePlantillaGuion = $_POST["nombrePlantillaGuion"];
+@$descripcion= $_POST["descripcion"];
 @$fechaCrecion = $_POST["fechaCrecion"];
 @$activo= $_POST["activo"];
+@$TipoPlantillaGuion= $_POST["TipoPlantillaGuion"];
+@$orden= $_POST["orden"];
 
 
 $GuionesModel = new GuionesModel();
@@ -19,27 +22,34 @@ switch($action){
     break;
     
     case "update":
-        $dataArray = buildArrayUpdate($_POST, "idTipoPlantillaGuion");
-        $idValuesArray = ["idField" => "idTipoPlantillaGuion", "idValue" => $idTipoPlantillaGuion];
+        $dataArray = buildArrayUpdate($_POST, "idPlantillaGuion");
+        $idValuesArray = ["idField" => "idPlantillaGuion", "idValue" => $idPlantillaGuion];
         echo $GuionesModel->updateGuiones($dataArray, $idValuesArray);
     break;
     
     case "delete":
-        $idValuesArray = ["idField" => "idTipoPlantillaGuion", "idValue" => $idTipoPlantillaGuion];
+        $idValuesArray = ["idField" => "idPlantillaGuion", "idValue" => $idPlantillaGuion];
         echo $GuionesModel->deleteGuiones($idValuesArray);
     break;
 
-    case "select":
-        $tables = "tiposplantillasguiones";
+    case "selectTable":
+        $tables = "plantillasguiones";
         $fields = "*";
         $where  = "";
         echo $GuionesModel->selectGuiones($tables, $fields, $where);
     break;
 
     case "selectCombo":
-        $tables = "Guiones";
+        $tables = "plantillasguiones";
         $fields = "*";
         $where  = "";
+        echo $GuionesModel->selectGuiones($tables, $fields, $where);
+    break;
+
+    case "selectByName":
+        $tables = "plantillasguiones";
+        $fields = "*";
+        $where  =" nombrePlantillaGuion='" . $nombrePlantillaGuion . "'";
         echo $GuionesModel->selectGuiones($tables, $fields, $where);
     break;
 

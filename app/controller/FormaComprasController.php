@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/FormaCompraModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -29,7 +29,7 @@ switch($action){
         echo $MetodoCompraModel->deleteMetodoCompra($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "metodoscompras";
         $fields = "*";
         $where  = "";
@@ -42,6 +42,14 @@ switch($action){
         $where  = "";
         echo $MetodoCompraModel->selectMetodoCompra($tables, $fields, $where);
     break;
+
+    case "selectByName":
+        $tables = "metodoscompras";
+        $fields = "*";
+        $where  =" nombreMetodoCompra='" . $nombreMetodoCompra . "'";
+        echo $MetodoCompraModel->selectMetodoCompra($tables, $fields, $where);
+    break;
+
 
 }
 

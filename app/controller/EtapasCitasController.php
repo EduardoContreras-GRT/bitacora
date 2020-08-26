@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/EtapasCitasModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -16,7 +16,7 @@ switch($action){
 
     case "insert":              
         $dataArray = buildArray($_POST);      
-        echo $EtapasCitasModel->inserEtapasCitas($dataArray);        
+        echo $EtapasCitasModel->insertEtapasCitas($dataArray);        
     break;
     
     case "update":
@@ -30,7 +30,7 @@ switch($action){
         echo $EtapasCitasModel->deleteEtapasCitas($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "etapascitas";
         $fields = "*";
         $where  = "";
@@ -43,6 +43,14 @@ switch($action){
         $where  = "";
         echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
     break;
+
+    case "selectCombo1":
+        $tables = "etapascitas";
+        $fields = "nombreEtapa, descripcionEtapa, orden, activo";
+        $where  = "";
+        echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
+    break;
+
 
 }
 

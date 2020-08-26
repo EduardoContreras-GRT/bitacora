@@ -1,5 +1,5 @@
 <?php
-include_once '../model/UsuarioModel.Class.php';
+include_once '../model/AsesorModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
@@ -36,7 +36,7 @@ switch($action){
         echo $AsesoresModel->deleteAsesores($idValuesArray);
     break;
 
-    case "select":
+    case "selectTable":
         $tables = "asesores";
         $fields = "*";
         $where  = "";
@@ -47,6 +47,19 @@ switch($action){
         $tables = "asesores";
         $fields = "*";
         $where  = "";
+        echo $AsesoresModel->selectAsesores($tables, $fields, $where);
+    break;
+    case "selectByNam":
+        $tables = "asesores";
+        $fields =  "nombre";
+        $where  = "";
+        echo $AsesoresModel->selectAsesores($tables, $fields, $where);
+    break;
+
+    case "selectByName":
+        $tables = "asesores";
+        $fields = "*";
+        $where  = " nombre='" . $nombre . "'";
         echo $AsesoresModel->selectAsesores($tables, $fields, $where);
     break;
 
