@@ -13,7 +13,7 @@
                 <label for="nombrePlantillaGuion">Nombre de Plantilla - Guión</label>
                 <input type="text" class="form-control" id="nombrePlantillaGuion" >
             </div>
-            
+            <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
                 <select class="form-control" id="activo">
@@ -21,11 +21,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
-            </div>
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar</button>
+                   
         </form>
     </div>
     <div class="col-lg-8" id="divDataTableGuiones">
@@ -73,7 +74,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmGuionesEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmGuionesEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmGuionesEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmGuionesEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

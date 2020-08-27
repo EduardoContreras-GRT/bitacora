@@ -13,7 +13,7 @@
                 <label for="nombreFuente">Nombre de Fuente</label>
                 <input type="text" class="form-control" id="nombreFuente" >
             </div>
-            
+            <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
                 <select class="form-control" id="activo">
@@ -21,10 +21,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFuentesLead()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFuentesLead()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmFuenteLead">Agregar</button>
+                    
             </div>
         </form>
     </div>
@@ -48,12 +50,12 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="Nombre" class="form-control-label">Fuentes</label>
-                        <input class="form-control" type="text" value="" id="Nombre">
+                        <label for="nombreFuente1" class="form-control-label">Fuentes</label>
+                        <input class="form-control" type="text" value="" id="nombreFuente1">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label for="Activo" class="form-control-label">Activo</label>
-                        <select class="form-control" id="Activo">
+                        <label for="activo" class="form-control-label">Activo</label>
+                        <select class="form-control" id="activo">
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
@@ -64,7 +66,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary"onclick="saveFuenteLead()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -74,7 +76,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmFuenteLeadEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmFuenteLeadEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmFuenteLeadEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmFuenteLeadEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -187,12 +189,33 @@ searchFuentesLead = function(){
 
 
 
-save = function(){
-//    var idAgencia = $("#idAgencia").val();
- //   var nombreAgencia = $("#nombreAgencia").val();
- //   var activo = $("#activo").val();
+    saveFuenteLead = function(){
+        var nombreFuente = $("#nombreFuente1").val(); 
 
-}
+        $.ajax({
+                method: "POST",
+                url: "controller/FuenteLeadController.php",            
+                data: { 
+                    action: "insert",                         
+                    nombreFuente: nombreFuente                                                                              
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                  // alert("sgundo if");
+                //  console.log(result.status);  
+                   // data = result.data;
+                   //console.log(result.data);
+                   data = result.data;
+                   alert("Registro guardado");
+                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                } 
+            }
+        });
+    }
 
 eliminar = function(){
 

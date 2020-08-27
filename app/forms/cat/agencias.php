@@ -13,6 +13,7 @@
                 <label for="Nombre">Nombre de Agencia</label>
                 <input type="text" class="form-control" id="Nombre">
             </div>
+            <!--
             <div class="form-group">
                 <label for="Activo">Activo</label>
                 <select class="form-control" id="Activo">
@@ -20,11 +21,14 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+            -->
             <div class="btn-group" role="group" aria-label="Basic example">  
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchAgencia()">Buscar</button>
-                <button type="button" class="btn btn-dark btn-group-lg"  value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>   
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmAgencias">Agregar</button>      
+              <!--  <button type="button" class="btn btn-dark btn-group-lg"  value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar</button> -->
             </div>
+
         </form>
     </div>
     <div class="col-lg-8" id="divDataTableAgencias">
@@ -48,8 +52,8 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="Nombre" class="form-control-label">Nombre de Agencia</label>
-                        <input class="form-control" type="text" value="" id="Nombre">
+                    <label for="Nombre1">Nombre de Agencia</label>
+                        <input type="text" class="form-control" id="Nombre1">    
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
@@ -64,7 +68,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -74,7 +78,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmAgenciasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmAgenciasEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmAgenciasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmAgenciasEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -203,7 +207,7 @@ return html += "</table>";
 //guarda agencia
     saveAgencias = function(){
         var IdAgencia = $("#IdAgencia").val();
-        var Nombre = $("#Nombre").val();
+        var Nombre = $("#Nombre1").val();
         var Activo = $("#Activo").val();
 
         $.ajax({
@@ -230,6 +234,7 @@ return html += "</table>";
         });
     }
 //borra
+/*
     deleteAgencia = function(){
         $(document).on('click','btn-delete',function(e){
             e.preventDefault();
@@ -239,9 +244,40 @@ return html += "</table>";
             console.log(data);
        });
     } 
-//impia busqueda
-    limpiar = function(){
-    }
+
+    */
+    /*
+//refresh
+    load = function(){
+    //Escuchamos el clic del botón
+    $("#btnActualizar").click(function(e) {
+        //Esto evita que la página se refresque al enviar el form//
+        e.preventDefault();
+        //Identificamos el formulario//
+        var frm = $("#frmAgencias");
+        //Serializamos sus elementos//
+        var data = frm.serialize();
+        //Preparamos nuestra petición Ajax//
+        var request = $.ajax({
+             url: "Controller/AgenciasController.php",      //La tomamos de la propiedad action del form
+            method: "POST",  //La tomamos de la propiedad method del form
+            data: data,  
+                action: "update"                //Los datos que construimos más arriba con serialize
+             dataType: "json"             //Indicamos que esperamos una respuesta en json
+        });
+
+        //En este bloque se manejan las peticiones exitosas//
+        request.done(function(res) {
+            console.log(res);
+           // $("#info").html(res.status);
+        });
+        request.fail(function(jqXHR, textStatus) {
+            alert("Hubo un error: " + textStatus);
+         //   $("#info").html("Error en la petición..."+textStatus);
+        });
+    });
+}
+    */
     
 
 

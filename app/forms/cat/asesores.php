@@ -59,33 +59,42 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombre" class="form-control-label">Nombre de Asesor</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                        <label for="nombre1" class="form-control-label">Nombre de Asesor</label>
+                        <input class="form-control" type="text" value="" id="nombre1">
                     </div>
                     
                     <div class="col-lg-6 col-md-6">
-                    <label for="apellidoMaterno" class="form-control-label">Apellido Materno</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                    <label for="apellidoMaterno1" class="form-control-label">Apellido Materno</label>
+                        <input class="form-control" type="text" value="" id="apellidoMaterno1">
                     </div>                         
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno" class="form-control-label">apellido Paterno</label>
-                    <input class="form-control" type="text" value="" id="apellidoPaterno">
+                    <label for="apellidoPaterno1" class="form-control-label">apellido Paterno</label>
+                    <input class="form-control" type="text" value="" id="apellidoPaterno1">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
                     <label for="activo" class="form-control-label">Estatus</label>
-                    <input class="form-control" type="text" value="" id="activo">
+                    <select class="form-control" id="activo">
+                            <option value="S">Si</option>
+                            <option value="N">No</option>
+                        </select>
                 </div>                         
             </div>   
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="tipoAsesor" class="form-control-label">Tipo Asesor</label>
-                    <input class="form-control" type="text" value="" id="tipoAsesor">
+                    <label for="tipoAsesor1" class="form-control-label">Tipo Asesor</label>
+                    <select class="form-control" id="tipoAsesor1">
+                            <option value="">Si</option>
+                            <option value="">No</option>
+                        </select>
                 </div>                         
                 <div class="col-lg-6 col-md-6">
-                    <label for="Agencias_idAgencia" class="form-control-label">Agencia</label>
-                    <input class="form-control" type="text" value="" id="Agencias_idAgencia">
+                    <label for="Agencias_idAgencia1" class="form-control-label">Agencia</label>
+                    <select class="form-control" id="Agencias_idAgencia1">
+                            <option value="">Si</option>
+                            <option value="">No</option>
+                        </select>
                 </div>                         
             </div>                                                                                                                                      
                                             
@@ -93,7 +102,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAsesores()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -199,7 +208,7 @@
 
     searchAsesores = function(){
         var nombreCompleto = $("#nombreCompleto").val();
-        var nombre = $("#nombre").val();
+        var nombre = $("#nombre1").val();
         var apellidoPaterno = $("#apellidoPaterno").val();  
         var apellidoMaterno = $("#apellidoMaterno").val(); 
           
@@ -233,15 +242,14 @@
 
 
     saveAsesores = function(){
-        var idAsesor = $("idAsesor").val();
-        var nombreCompleto = $("nombreCompleto").val();
-        var nombre = $("#nombre").val();
-        var apellidoPaterno = $("#apellidoPaterno").val();
-        var apellidoMaterno = $("#apellidoMaterno").val();
-        var fechaCreacion = $("#fechaCreacion").val();
-        var Activo= $("#Activo").val();
-        var tipoAsesor = $("#tipoAsesor").val();
-        var Agencias_idAgencias = $("#Agencias_idAgencias").val();
+       // var idAsesor = $("idAsesor").val();
+        var nombreCompleto = $("nombreCompleto1").val();
+        var nombre = $("#nombre1").val();
+        var apellidoPaterno = $("#apellidoPaterno1").val();
+        var apellidoMaterno = $("#apellidoMaterno1").val();
+        var Activo= $("#Activo1").val();
+        var tipoAsesor = $("#tipoAsesor1").val();
+        var Agencias_idAgencias = $("#Agencias_idAgencias1").val();
 
         $.ajax({
                 method: "POST",
@@ -250,7 +258,10 @@
                     action: "insert",                         
                     nombre: nombre,
                     apellidoPaterno: apellidoPaterno,
-                    apellidoMaterno: apellidoMaterno                                                                                
+                    apellidoMaterno: apellidoMaterno,
+                    activo: activo,
+                    tipoAsesor: tipoAsesor,
+                    Agencias_idAgencias: Agencias_idAgencias                                                                              
                 },
                 dataType: "json"
         })
@@ -268,6 +279,8 @@
             }
         });
     }
+
+
     eliminar = function(){
 
     }   

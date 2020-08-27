@@ -13,7 +13,7 @@
                 <label for="nombreTemperatura">Nombre</label>
                 <input type="text" class="form-control" id="nombreTemperatura" >
             </div>
-            
+            <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
                 <select class="form-control" id="activo">
@@ -21,10 +21,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchTemperaturas()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchTemperaturas()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmTemperaturas">Agregar</button>
+                        
             </div>
         </form>
     </div>
@@ -47,9 +49,10 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="Nombre" class="form-control-label">Temperaturas</label>
-                        <input class="form-control" type="text" value="" id="Nombre">
+                        <label for="nombreTemperatura1" class="form-control-label">Temperaturas</label>
+                        <input class="form-control" type="text" value="" id="nombreTemperatura1">
                     </div>
+                    
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
                         <select class="form-control" id="Activo">
@@ -63,7 +66,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary"onclick="saveTemperaturas()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -73,7 +76,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmTemperaturasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmTemperaturasEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmTemperaturasEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmTemperaturasEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -189,13 +192,33 @@ searchTemperaturas = function(){
     }
 
 
-save = function(){
-//    var idAgencia = $("#idAgencia").val();
- //   var nombreAgencia = $("#nombreAgencia").val();
- //   var activo = $("#activo").val();
+    saveTemperaturas = function(){
+        var nombreTemperatura = $("#nombreTemperatura1").val(); 
 
-}
-
+        $.ajax({
+                method: "POST",
+                url: "controller/TemperaturaController.php",            
+                data: { 
+                    action: "insert",                         
+                    nombreTemperatura: nombreTemperatura                                                                            
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                  // alert("sgundo if");
+                //  console.log(result.status);  
+                   // data = result.data;
+                   //console.log(result.data);
+                   data = result.data;
+                   alert("Registro guardado");
+                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                } 
+            }
+        });
+    }
 eliminar = function(){
 
 }    

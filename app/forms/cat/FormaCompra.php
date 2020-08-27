@@ -10,10 +10,10 @@
         <form>
             <input type="hidden" class="form-control" id="idMetodoCompra" >
             <div class="form-group">
-                <label for="nombreMetodoCompra">Nombre de Metodo de Compra</label>
+                <label for="nombreMetodoCompra">Metodo de Compra</label>
                 <input type="text" class="form-control" id="nombreMetodoCompra" >
             </div>
-            
+            <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
                 <select class="form-control" id="activo">
@@ -21,10 +21,12 @@
                     <option value="N">No</option>              
                 </select>
             </div>
+-->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFormaCompra()">Buscar</button>
-                <button type="button" class="btn btn-success btn-group-lg">Guardar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFormaCompra()">Buscar</button>
+                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmFormaCompra">Agregar</button>
+                            
             </div>
         </form>
     </div>
@@ -48,8 +50,8 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="Nombre" class="form-control-label">Nombre de Metodo de Compra</label>
-                        <input class="form-control" type="text" value="" id="Nombre">
+                        <label for="nombreMetodoCompra1" class="form-control-label"> Metodo de Compra</label>
+                        <input class="form-control" type="text" value="" id="nombreMetodoCompra1">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
@@ -64,7 +66,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary"onclick="saveFormaCompra()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -74,7 +76,7 @@
 <!--  MODAL FORM  -->
 
 <!--  MODAL FORM  ELIMINAR -->
-<<div class="modal fade" id="modalFrmFormaCompraEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmFormaCompraEliminar" aria-hidden="true">
+<div class="modal fade" id="modalFrmFormaCompraEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmFormaCompraEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -188,11 +190,32 @@
         });
     }
 
-    save = function(){
-    //    var idAgencia = $("#idAgencia").val();
-     //   var nombreAgencia = $("#nombreAgencia").val();
-     //   var activo = $("#activo").val();
+    saveFormaCompra = function(){
+        var nombreMetodoCompra = $("#nombreMetodoCompra1").val(); 
 
+        $.ajax({
+                method: "POST",
+                url: "controller/FormaComprasController.php",            
+                data: { 
+                    action: "insert",                         
+                    nombreMetodoCompra: nombreMetodoCompra                                                                              
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                  // alert("sgundo if");
+                //  console.log(result.status);  
+                   // data = result.data;
+                   //console.log(result.data);
+                   data = result.data;
+                   alert("Registro guardado");
+                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                } 
+            }
+        });
     }
 
     eliminar = function(){

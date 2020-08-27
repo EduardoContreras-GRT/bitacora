@@ -32,7 +32,7 @@
             </div>
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar</button>
+                <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar </button>
                 <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button>
                        
@@ -199,7 +199,7 @@
             method: "POST",
             url: "controller/EtapasCitasController.php",            
             data: { 
-                action: "selectCombo", 
+                action: "selectByName", 
                 nombreEtapa: nombreEtapa,
                 descripcionEtapa: descripcionEtapa,
                 orden: orden,
@@ -223,6 +223,42 @@
             }
         });
     }
+/*
+    saveEtapasCitas = function(){
+        var IdAgencia = $("#IdAgencia").val();
+        var nombreEtapa= $("#nombreEtapa").val();
+        var descripcionEtapa = $("#descripcionEtapa").val();
+        var orden = $("#orden").val(); 
+        var activo = $("#activo").val(); 
+
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasCitasController.php",            
+                data: { 
+                    action: "insert",                         
+                    Nombre: nombreEtapa : nombreEtapa,
+                    descripcionEtapa: descripcionEtapa,
+                    orden: orden,
+                    activo: activo                                                                                
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                //   alert("sgundo if");
+                 // console.log(result.status);  
+                   // data = result.data;
+                   data = result.data
+                   alert("Registro guardado");
+                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                } 
+            }
+        });
+    }
+*/
+
 
     eliminar = function(){
     }  
