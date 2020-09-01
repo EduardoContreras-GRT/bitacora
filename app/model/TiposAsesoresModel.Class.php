@@ -1,10 +1,10 @@
 <?php
 include_once dirname(__FILE__) . '/../lib/connect/Connect.php';
 
-class GuionesModel{
+class TiposAsesoresModel{
 
    
-    private $table = "plantillasguiones";
+    private $table = "tiposasesores";
     private $data = "";
     private $fields = "";
     private $where = "";
@@ -15,14 +15,14 @@ class GuionesModel{
         
     }
 
-    public function insertGuiones($data = []){
+    public function insertTiposAsesores($data = []){
         $this->data = $data;
-        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "idPlantillaGuion"];
+        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "idTipoAsesor"];
         $Connection = new Connect();
         return $Connection->insert($dataArray);
     }
 
-    public function updateGuiones($data = [], $idValues = []){
+    public function updateTiposAsesores($data = [], $idValues = []){
         $this->data = $data;
         $this->idValues = $idValues;
         $dataArray = ["table" => $this->table, "idValues" => $this->idValues ,"data" => $this->data];
@@ -30,13 +30,13 @@ class GuionesModel{
         return $Connection->update($dataArray);
     }
 
-    public function deleteGuiones($idValues = []){      
+    public function deleteTiposAsesores($idValues = []){      
         $this->idValues = $idValues;
         $dataArray = ["table" => $this->table, "idValues" => $this->idValues];
         $Connection = new Connect();
         return $Connection->delete($dataArray);
     }
-    public function selectGuiones($tables = "", $fields = "", $where = ""){
+    public function selectTiposAsesores($tables = "", $fields = "", $where = ""){
         $this->table = $tables;
         $this->fields = $fields;
         $this->where = $where;

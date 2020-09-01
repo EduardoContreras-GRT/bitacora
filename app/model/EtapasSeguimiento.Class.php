@@ -4,7 +4,7 @@ include_once dirname(__FILE__) . '/../lib/connect/Connect.php';
 class EtapasSeguimientoModel{
 
    
-    private $table = "etapasseguimiento";
+    private $table = "etapasseguimientos";
     private $data = "";
     private $fields = "";
     private $where = "";

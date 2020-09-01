@@ -17,7 +17,7 @@ class EtapasCitasModel{
 
     public function insertEtapasCitas($data = []){
         $this->data = $data;
-        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "idEtapaCitas"];
+        $dataArray = ["table" => $this->table, "data" => $this->data, "pk" => "idEtapaCita"];
         $Connection = new Connect();
         return $Connection->insert($dataArray);
     }
