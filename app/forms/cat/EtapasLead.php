@@ -33,7 +33,7 @@
             -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasLead">Agregar</button>
                             
             </div>
@@ -56,36 +56,36 @@
         </div>
         <div class="modal-body">
             <form id="frmEtapasLeadModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idEtapaLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombre" class="form-control-label">Nombre de Etapa</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                        <label for="nombreEtapa1" class="form-control-label">Nombre de Etapa</label>
+                        <input class="form-control" type="text" value="" id="nombreEtapa1" required >
                     </div>
                     <div class="col-lg-6 col-md-6">
-                    <label for="apellidoMaterno" class="form-control-label">Descripción</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                    <label for="descripcionEtapa" class="form-control-label">Descripción</label>
+                        <input class="form-control" type="text" value="" id="descripcionEtapa">
                     </div>                         
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno" class="form-control-label">Orden</label>
-                    <input class="form-control" type="text" value="" id="PrimerNombre">
+                    <label for=" orden" class="form-control-label">Orden</label>
+                    <input class="form-control" type="text" value="" id="orden" maxlength="10">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
-                    <label for="Activo" class="form-control-label">Activo</label>
-                        <select class="form-control" id="Activo">
+                    <label for="activo" class="form-control-label">Activo</label>
+                        <select class="form-control" id="activo">
+                            <option value = "">Selecciona</option>
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
                 </div>                         
-            </div>                                                                                                                                               
-                                            
+            </div>                                                                                                                                                                                     
             </form>           
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasLead()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -227,22 +227,49 @@
     }
 
 
+   // Guarda   ------------>
+ 
 
 
+ //   save  ------------>
 
-
-
-
-    save = function(){
-    //    var idAgencia = $("#idAgencia").val();
-     //   var nombreAgencia = $("#nombreAgencia").val();
-     //   var activo = $("#activo").val();
-
+saveEtapasLead = function(){
+        var nombreEtapa= $("#nombreEtapa1").val()
+        var descripcionEtapa = $("#descripcionEtapa").val();
+        var orden = $("#orden").val(); 
+        var activo = $("#activo").val(); 
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasLeadController.php",            
+                data: { 
+                     action: "insert",                         
+                     nombreEtapa: nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                     activo: activo                                                                             
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                //   alert("sgundo if");
+                 // console.log(result.status);  
+                   // data = result.data;
+                   data = result.data
+                   alert("Registro guardado");
+                } 
+            }
+        });
     }
+    
 
+ // --------------->
     eliminar = function(){
 
-    }    
+    }   
+
     $(document).ready(function () {
                // alert("hola");
             getEtapasLead();

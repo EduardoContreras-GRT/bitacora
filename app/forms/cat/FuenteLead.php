@@ -24,7 +24,7 @@
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFuentesLead()">Buscar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmFuenteLead">Agregar</button>
                     
             </div>

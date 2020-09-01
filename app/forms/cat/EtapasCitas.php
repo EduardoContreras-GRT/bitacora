@@ -33,7 +33,7 @@
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar </button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button>
                        
             </div>
@@ -57,25 +57,27 @@
         </div>
         <div class="modal-body">
             <form id="frmEtapasCitasModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idEtapaCita">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombre" class="form-control-label">Nombre de Etapa</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                        <label for="nombreEtapa1" class="form-control-label">Nombre de Etapa</label>
+                        <input class="form-control" type="text" value="" id="nombreEtapa1">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                    <label for="apellidoMaterno" class="form-control-label">Descripción</label>
-                        <input class="form-control" type="text" value="" id="nombre">
+                    <label for="descripcionEtapa" class="form-control-label">Descripción</label>
+                        <input class="form-control" type="text" value="" id="descripcionEtapa">
                     </div>                         
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno" class="form-control-label">Orden</label>
-                    <input class="form-control" type="text" value="" id="PrimerNombre">
+                    <label for="orden" class="form-control-label">Orden</label>
+                    <input class="form-control" type="text" value="" id="orden"  maxlength="10" >
+                    <!-- oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /><i>(Máximo 10 dígitos)</i> -->
                 </div>                         
                 <div class="col-lg-6 col-md-6">
                     <label for="Activo" class="form-control-label">Activo</label>
                         <select class="form-control" id="Activo">
+                            <option value = "">Selecciona</option>
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
@@ -86,8 +88,8 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
-        
+        <button type="button" class="btn btn-primary"  value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()">Guardar Cambios</button>
+        <!-- <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()">Guardar Cambios</button> -->
         </div>
       </div>
     </div>
@@ -122,7 +124,7 @@
 
 
 <script>
-
+//   get ------------>
     getEtapasCitas = function(){
         $.ajax({
             method: "POST",
@@ -142,7 +144,7 @@
         }); 
     }
 
-
+//   grid ------------>
     buildGridEtapas = function (data, total){
         var html = "<table id='tblEtapasCitas' class='table table table-hover'>";                 
         var data = data;
@@ -188,7 +190,7 @@
     }
 
 
-
+//   search ------------>
     searchEtapasCitas = function(){
         var nombreEtapa= $("#nombreEtapa").val();
         var descripcionEtapa = $("#descripcionEtapa").val();
@@ -204,7 +206,6 @@
                 descripcionEtapa: descripcionEtapa,
                 orden: orden,
                 activo: activo
-
             },
             dataType: "json"
         })
@@ -223,23 +224,23 @@
             }
         });
     }
-/*
-    saveEtapasCitas = function(){
-        var IdAgencia = $("#IdAgencia").val();
-        var nombreEtapa= $("#nombreEtapa").val();
+
+//   save  ------------>
+
+saveEtapasCitas = function(){
+        var nombreEtapa= $("#nombreEtapa1").val()
         var descripcionEtapa = $("#descripcionEtapa").val();
         var orden = $("#orden").val(); 
         var activo = $("#activo").val(); 
-
         $.ajax({
                 method: "POST",
                 url: "controller/EtapasCitasController.php",            
                 data: { 
                     action: "insert",                         
-                    Nombre: nombreEtapa : nombreEtapa,
-                    descripcionEtapa: descripcionEtapa,
-                    orden: orden,
-                    activo: activo                                                                                
+                     nombreEtapa : nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                    // activo: activo                                                                                
                 },
                 dataType: "json"
         })
@@ -252,17 +253,17 @@
                    // data = result.data;
                    data = result.data
                    alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
                 } 
             }
         });
     }
-*/
+    
 
 
+//    ------------>
     eliminar = function(){
     }  
-
+//   ------------>
     $(document).ready(function (){
                // alert("hola");
             getEtapasCitas();

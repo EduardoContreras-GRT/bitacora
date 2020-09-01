@@ -7,7 +7,7 @@
         <h2 class="display-5">Plantillas- Guiones</h2>
         <p class="lead">Formas</p>
         <hr class="my-4">
-        <form>
+        <form id= "guiones">
             <input type="hidden" class="form-control" id="idPlantillaGuion" >
             <div class="form-group">
                 <label for="nombrePlantillaGuion">Nombre de Plantilla - Guión</label>
@@ -21,16 +21,17 @@
                     <option value="N">No</option>              
                 </select>
             </div>
--->
+            -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar</button>
-                   
+                <button class="btn btn-primary btn-group-lg"  type="reset" >Limpiar</button> 
+                
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar</button>        
+            </div>
         </form>
     </div>
-    <div class="col-lg-8" id="divDataTableGuiones">
-    </div>
+        <div class="col-lg-8" id="divDataTableGuiones">
+        </div>
 </div>
 
 <!--  MODAL FORM  EDITAR-->
@@ -48,8 +49,8 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="Nombre" class="form-control-label">Nombre</label>
-                        <input class="form-control" type="text" value="" id="Nombre">
+                        <label for="nombrePlantillaGuion1" class="form-control-label">Nombre</label>
+                        <input class="form-control" type="text" value="" id="nombrePlantillaGuion1">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
@@ -64,7 +65,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" onclick="saveGuiones()">Guardar Cambios</button>
         
         </div>
       </div>
@@ -120,6 +121,7 @@ getGuiones = function(){
 
 }
 
+// ----------------->
 
 buildGridGuiones= function (data, total){
     var html = "<table id='tblGuiones' class='table table table-hover'>";                 
@@ -163,18 +165,14 @@ buildGridGuiones= function (data, total){
         html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmGuionesEliminar"><i class="fas fa-trash"></i></button>'    
         html += '</td>';  
-
-
-
     } 
-
     return html += "</table>";  
 }
 
+// ---------------->
 
 searchGuiones = function(){
         var nombrePlantillaGuion = $("#nombrePlantillaGuion").val(); 
-          
             $.ajax({
             method: "POST",
             url: "controller/GuionesController.php",            
@@ -189,23 +187,45 @@ searchGuiones = function(){
                 if(result.status === "ok"){     
                     
                     var html = buildGridGuiones(result.data, result.total);
-                    $("#DataTableGuiones").html(html);
+                    $("#divDataTableGuiones").html(html);
                     $('#tblGuiones').DataTable();                                                   
                 }else{
-                    $("#DataTableGuiones").html("Sin Resultados");
+                    $("#divDataTableGuiones").html("Sin Resultados");
                 }
             }else{
-                $("#DataTableGuiones").html("Recargar la página");
+                $("#divDataTableGuiones").html("Recargar la página");
             }
         });
     }
 
-save = function(){
-//    var idAgencia = $("#idAgencia").val();
- //   var nombreAgencia = $("#nombreAgencia").val();
- //   var activo = $("#activo").val();
 
-}
+    saveGuiones = function(){
+        var nombrePlantillaGuion = $("#nombrePlantillaGuion1").val(); 
+
+        $.ajax({
+                method: "POST",
+                url: "controller/GuionesController.php",            
+                data: { 
+                    action: "insert",                         
+                    nombrePlantillaGuion: nombrePlantillaGuion                                                                           
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                  // alert("sgundo if");
+                //  console.log(result.status);  
+                   // data = result.data;
+                   //console.log(result.data);
+                   data = result.data;
+                   alert("Registro guardado");
+                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                } 
+            }
+        });
+    }
 
 eliminar = function(){
 

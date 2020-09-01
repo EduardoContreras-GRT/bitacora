@@ -33,7 +33,7 @@
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-dark btn-group-lg">Buscar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button>     
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>     
                 <button type="button" value="Guardar" id="btnGuardar"  data-toggle="modal" data-target="#modalFrmAsesores" class="btn btn-dark btn-group-lg">Agregar</button>
                    
             </div>
@@ -56,7 +56,8 @@
         </div>
         <div class="modal-body">
             <form id="frmAsesoresModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idAsesor">
+                <input type="hidden" value="" id="nombreCompleto">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombre1" class="form-control-label">Nombre de Asesor</label>
@@ -70,12 +71,13 @@
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno1" class="form-control-label">apellido Paterno</label>
+                    <label for="apellidoPaterno1" class="form-control-label">Apellido Paterno</label>
                     <input class="form-control" type="text" value="" id="apellidoPaterno1">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
                     <label for="activo" class="form-control-label">Estatus</label>
                     <select class="form-control" id="activo">
+                           <option value = "">Selecciona</option>
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
@@ -83,18 +85,20 @@
             </div>   
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="tipoAsesor1" class="form-control-label">Tipo Asesor</label>
-                    <select class="form-control" id="tipoAsesor1">
-                            <option value="">Si</option>
-                            <option value="">No</option>
-                        </select>
+                    <label for="idTipoAsesor" class="form-control-label">Tipo Asesor</label>
+                    <div id="divIdAsesores">
+                            <select id="idTipoAsesor" class="form-control">
+                                <option value = "">Selecciona</option>
+                            </select>
+                        </div>
                 </div>                         
                 <div class="col-lg-6 col-md-6">
-                    <label for="Agencias_idAgencia1" class="form-control-label">Agencia</label>
-                    <select class="form-control" id="Agencias_idAgencia1">
-                            <option value="">Si</option>
-                            <option value="">No</option>
-                        </select>
+                    <label for="IdAgencia" class="form-control-label">Agencia</label>
+                    <div id="divIdAgencias">
+                            <select id="IdAgencia" class="form-control">
+                                <option value = "">Selecciona</option>
+                            </select>
+                        </div>
                 </div>                         
             </div>                                                                                                                                      
                                             
@@ -138,7 +142,7 @@
 
 
 <script>
-
+//   ------------>
     getAsesores = function(){
         $.ajax({
             method: "POST",
@@ -159,7 +163,7 @@
 
     }
 
-
+//   ------------>
     buildGridAsesores = function (data, total){
         var html = "<table id='tblAsesores' class='table table table-hover'>";                 
         var data = data;
@@ -198,19 +202,21 @@
             html += data[i].tipoAsesor;  
             html += ' </td>';   
             html += '<td>'; 
-            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmAsesores" ><i class="fas fa-edit"></i></button>'
+            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" onclick="loadInfoAsesores(' + data[i].idAsesor + ')" data-toggle="modal" data-target="##modalFrmAsesores" ><i class="fas fa-edit"></i></button>'
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmAsesoresEliminar"><i class="fas fa-trash"></i></button>'    
-            
+            //"loadInfoContacto(' + data[i].IdParticipante + ')" data-toggle="modal" data-target="#modalFrmParticipantes"
+          //  "loadInfoAsesores(' + data[i].idAsesorr + ')" data-toggle="modal" data-target="##modalFrmAsesores"
         } 
         return html += "</table>";  
     }
-
+//   ------------>
     searchAsesores = function(){
         var nombreCompleto = $("#nombreCompleto").val();
         var nombre = $("#nombre1").val();
         var apellidoPaterno = $("#apellidoPaterno").val();  
         var apellidoMaterno = $("#apellidoMaterno").val(); 
+        var tipoAsesor = $("#tipoAsesor").val();
           
             $.ajax({
             method: "POST",
@@ -218,6 +224,7 @@
             data: { 
                 action: "selectByName", 
                 nombre: nombre
+                
               //  apellidoPaterno: apellidoPaterno,
                // apellidoMaterno: apellidoMaterno
 
@@ -240,7 +247,127 @@
         });
     }
 
+// ------------->
+searchAsesores2 = function(){
+        var nombreCompleto = $("#nombreCompleto").val();
+        var nombre = $("#nombre1").val();
+        var apellidoPaterno = $("#apellidoPaterno").val();  
+        var apellidoMaterno = $("#apellidoMaterno").val(); 
+        var idTipoAsesor = $("#idTipoAsesor").val();
+            $.ajax({
+            method: "POST",
+            url: "controller/AsesorController.php",            
+            data: { 
+                action: "consultaTipoAsesor", 
+                nombre: nombre,
+                tipoAsesor: idTipoAsesor
+              //  apellidoPaterno: apellidoPaterno,
+               // apellidoMaterno: apellidoMaterno
 
+            },
+            dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){               
+                if(result.status === "ok"){     
+                    
+                    var html = buildGridAsesores(result.data, result.total);
+                    $("#divDataTableAsesores").html(html);
+                    $('#tblAsesores').DataTable();                                                   
+                }else{
+                    $("#divDataTableAsesores").html("Sin Resultados");
+                 }
+                }else{
+                $("#divDataTableAsesores").html("Recargar la página");
+            }
+        });
+    }
+
+//  ------------->
+loadAsesores = function(idDiv, idCampo){
+        $.ajax({
+            method: "POST",
+            url: "controller/TiposAsesoresController.php",            
+            data: { action: "selectCombo"},
+            dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){                     
+                    var html = "";
+                    html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
+                    html += "<option value=''>Seleccione tipo de Asesor</option>";
+                    $.each(result.data, function (key, val) {
+                        html += "<option value='" + val.idTipoAsesor  + "'>" + val.nombreTipoAsesor  + "</option>";
+                    });
+                    html += "</select>";
+                    $("#"+idDiv).html(html);                         
+                }
+            }
+        });
+    };
+
+
+
+// ------------>
+loadAgencia = function(idDiv, idCampo){
+        $.ajax({
+            method: "POST",
+            url: "controller/AgenciasController.php",            
+            data: { action: "selectCombo"},
+            dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){                     
+                    var html = "";
+                    html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
+                    html += "<option value=''>Seleccione Agencia</option>";
+                    $.each(result.data, function (key, val) {
+                        html += "<option value='" + val.IdAgencia  + "'>" + val.Nombre + "</option>";
+                    });
+                    html += "</select>";
+                    $("#"+idDiv).html(html);                         
+                }
+            }
+        });
+    }
+
+//------------->
+loadInfoAgencias = function(IdAgencias){
+        $.ajax({
+                method: "POST",
+                url: "controller/AgenciasController.php",            
+                data: { 
+                    action: "selectById",
+                    IdAgencia: IdAgencia                          
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#IdAgencia").val(data[0].IdAgencia);
+                   $("#Nombre").val(data[0].RazonSocial);
+                   $("#Activo").val(data[0].RFC);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '';     
+                       
+      //  <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar Cambios</button>
+                    if($("#IdAgencia").val() != ""){
+                        btnGuardar = '<button type="button" onclick="saveAgencias()" class="btn btn-primary">Guardar</button>';  
+                    } else {
+                        alert("intenta nuevamente");  
+                    }
+                    var html = "";
+                    html += btnCerrar + btnGuardar;                   
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+//   ------------>
     saveAsesores = function(){
        // var idAsesor = $("idAsesor").val();
         var nombreCompleto = $("nombreCompleto1").val();
@@ -248,8 +375,8 @@
         var apellidoPaterno = $("#apellidoPaterno1").val();
         var apellidoMaterno = $("#apellidoMaterno1").val();
         var Activo= $("#Activo1").val();
-        var tipoAsesor = $("#tipoAsesor1").val();
-        var Agencias_idAgencias = $("#Agencias_idAgencias1").val();
+        var idTipoAsesor = $("#idTipoAsesor").val();
+        var Agencias_idAgencias = $("#IdAgencia").val();
 
         $.ajax({
                 method: "POST",
@@ -260,8 +387,8 @@
                     apellidoPaterno: apellidoPaterno,
                     apellidoMaterno: apellidoMaterno,
                     activo: activo,
-                    tipoAsesor: tipoAsesor,
-                    Agencias_idAgencias: Agencias_idAgencias                                                                              
+                    tipoAsesor: idTipoAsesor,
+                    Agencias_idAgencias: IdAgencia                                                                            
                 },
                 dataType: "json"
         })
@@ -280,14 +407,61 @@
         });
     }
 
+//   ------------>
+
+loadInfoAsesores = function(idAsesor){
+        $.ajax({
+                method: "POST",
+                url: "controller/AsesorController.php",            
+                data: { 
+                    action: "selectById",
+                   idAsesor: idAsesor                         
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                //   $("#nombreCompleto").val(data[0].nombreCompleto);
+                   $("#nombre1").val(data[0].nombre);
+                   $("#apellidoMaterno1").val(data[0].apellidoMaterno);
+                   $("#apellidoPaterno1").val(data[0].apellidoPaterno);
+                   $("#Activo1").val(data[0].Activo);
+                   $("#idTipoAsesor").val(data[0].tipoAsesor);
+                   $("#IdAgencia").val(data[0].Agencias_idAgencias);
+                   
+                    
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" class="btn btn-primary">Guardar</button>';
+                    var btnFactura = '<button type="button" class="btn btn-primary">Factura</button>';
+                    var btnPago = '<button type="button" class="btn btn-primary">Pago</button>';
+
+                    var html = "";
+                    html += btnCerrar + btnGuardar + btnFactura;
+
+                   
+
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// -------------->
+
 
     eliminar = function(){
 
     }   
-
+//   ------------>
     $(document).ready(function () {
                // alert("hola");
             getAsesores();
+            loadAsesores("divIdAsesores", "idAsesor");   
+            loadAgencia("divIdAgencias", "IdAgencia");
+        //    loadEmpleados("divIdEmpleadoConsulta", "IdEmpleadoConsulta");
+      //  loadEmpleados("divIdEmpleado", "IdEmpleado");
+            
         });
 
     

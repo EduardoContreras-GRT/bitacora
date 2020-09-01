@@ -24,7 +24,7 @@
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasSeguimientos()">Buscar</button>
-                <button type="button" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento">Agregar</button>
                          
             </div>
@@ -66,7 +66,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="saveEtapasSeguimiento()">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasSeguimiento()">Guardar Cambios</button>
         
         </div>
       </div>
