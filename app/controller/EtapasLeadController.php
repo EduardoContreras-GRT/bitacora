@@ -15,7 +15,16 @@ $EtapasLeadModel = new EtapasLeadModel();
 switch($action){
 
     case "insert":              
-        $dataArray = buildArray($_POST);      
+        $dataArray = [
+           
+            "nombreEtapa" => $nombreEtapa,
+            "descripcionEtapa" => $descripcionEtapa,
+            "orden" => $orden,
+            "activo" => "S"
+       ]; 
+       
+       
+        //$dataArray = buildArray($_POST);      
         echo $EtapasLeadModel->insertEtapasLead($dataArray);        
     break;
     

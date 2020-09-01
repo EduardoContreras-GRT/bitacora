@@ -59,6 +59,16 @@ switch($action){
         echo $AgenciasModel->selectAgencias($tables, $fields, $where);
     break;
 
+    case "selectById":
+        $tables = "agencias";
+        $fields = "*";
+        $where  = " IdAgencia='" . $IdAgencia . "'";
+        echo $AgenciasModel->selectAgencias($tables, $fields, $where);
+
+    
+    break;
+
+
     
 
 }

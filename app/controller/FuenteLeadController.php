@@ -13,8 +13,12 @@ $FuentesLeadModel = new FuentesLeadModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert":       
+        $dataArray = [
+            "nombreFuente" => $nombreFuente,
+            "activo" => "S" 
+       ];       
+       // $dataArray = buildArray($_POST);      
         echo $FuentesLeadModel->insertFuentesLead($dataArray);        
     break;
     

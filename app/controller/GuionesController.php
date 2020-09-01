@@ -16,8 +16,12 @@ $GuionesModel = new GuionesModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert": 
+        $dataArray = [
+            "nombrePlantillaGuion" => $nombrePlantillaGuion,
+            "activo" => "S" 
+       ];     
+       // $dataArray = buildArray($_POST);      
         echo $GuionesModel->insertGuiones($dataArray);        
     break;
     

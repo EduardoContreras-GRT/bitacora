@@ -13,8 +13,12 @@ $TemperaturaModel = new TemperaturaModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert": 
+        $dataArray = [
+            "nombreTemperatura" => $nombreTemperatura,
+            "activo" => "S" 
+       ];             
+      //  $dataArray = buildArray($_POST);      
         echo $TemperaturaModel->insertTemperatura($dataArray);        
     break;
     

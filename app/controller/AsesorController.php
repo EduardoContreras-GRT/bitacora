@@ -20,8 +20,16 @@ $AsesoresModel = new AsesoresModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert":  
+        $dataArray = [
+           
+            "nombre" => $nombreCompleto,
+            "apellidoPaterno" => $apellidoPaterno,
+            "apellidoMaterno" => $apellidoMaterno,
+            "Activo" => "S",
+            "tipoAsesor" => $tipoAsesor
+       ]; 
+       // $dataArray = buildArray($_POST);      
         echo $AsesoresModel->insertAsesores($dataArray);        
     break;
     
@@ -49,12 +57,6 @@ switch($action){
         $where  = "";
         echo $AsesoresModel->selectAsesores($tables, $fields, $where);
     break;
-    case "selectByNam":
-        $tables = "asesores";
-        $fields =  "nombre";
-        $where  = "";
-        echo $AsesoresModel->selectAsesores($tables, $fields, $where);
-    break;
 
     case "selectByName":
         $tables = "asesores";
@@ -62,6 +64,24 @@ switch($action){
         $where  = " nombre='" . $nombre . "'";
         echo $AsesoresModel->selectAsesores($tables, $fields, $where);
     break;
+
+    case "selectById":
+        $tables = "asesores";
+        $fields = "*";
+        $where  = "idAsesor='" . $idAsesor . "'";
+        echo $AsesoresModel->selectAsesores($tables, $fields, $where);
+    break;
+    
+    case "consultaTipoAsesor":
+        $tables = "asesores AS, tiposasesores TA, Agencias AG"; 
+        $fields = "AS.idAsesor, AS.nombre, AS.apellidoPaterno, AS.apellidoMaterno, AS.tipoAsesor, AS.Agencias_idAgencias";
+        $where = "AS.tipoAsesor = TA.nombreTipoAsesor AND AS.Agencias_idAgencias = AG.idAgencia";
+ echo $AsesoresModel->selectAsesores($tables, $fields, $where);
+    break;
+    
+
+   
+
 
 }
 

@@ -14,8 +14,12 @@ $EtapasSeguimientoModel = new EtapasSeguimientoModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert":
+        $dataArray = [
+            "nombreEtapaSeguimiento" => $nombreEtapaSeguimiento,
+            "activo" => "S" 
+       ];               
+        //$dataArray = buildArray($_POST);      
         echo $EtapasSeguimientoModel->insertEtapasSeguimiento($dataArray);        
     break;
     

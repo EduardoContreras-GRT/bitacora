@@ -13,8 +13,12 @@ $MetodoCompraModel = new MetodoCompraModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert":    
+        $dataArray = [
+            "nombreMetodoCompra" => $nombreMetodoCompra,
+            "activo" => "S" 
+       ];           
+        //$dataArray = buildArray($_POST);      
         echo $MetodoCompraModel->insertMetodoCompra($dataArray);        
     break;
     

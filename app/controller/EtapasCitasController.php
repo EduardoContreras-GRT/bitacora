@@ -14,8 +14,16 @@ $EtapasCitasModel = new EtapasCitasModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert":    
+        $dataArray = [
+           
+            "nombreEtapa" => $nombreEtapa,
+            "descripcionEtapa" => $descripcionEtapa,
+            "orden" => $orden,
+            "activo" => "S"
+           
+       ];           
+       // $dataArray = buildArray($_POST);      
         echo $EtapasCitasModel->insertEtapasCitas($dataArray);        
     break;
     
@@ -48,6 +56,13 @@ switch($action){
         $tables = "etapascitas";
         $fields = "nombreEtapa, descripcionEtapa, orden, activo";
         $where  = "";
+        echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
+    break;
+
+    case "selectByName":
+        $tables = "etapascitas";
+        $fields = "*";
+        $where  = " nombreEtapa='" . $nombreEtapa . "'";
         echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
     break;
 
