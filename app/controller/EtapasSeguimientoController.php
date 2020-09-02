@@ -54,6 +54,13 @@ switch($action){
         $where  =" nombreEtapaSeguimiento='" . $nombreEtapaSeguimiento . "'";
         echo $EtapasSeguimientoModel->selectEtapasSeguimiento($tables, $fields, $where);
     break;
+    
+    case "selectById":
+        $tables = "etapasseguimientos";
+        $fields = "*";
+        $where  = "idEtapaSeguimiento='" . $idEtapaSeguimiento . "'";
+        echo $EtapasSeguimientoModel->selectEtapasSeguimiento($tables, $fields, $where);
+    break;
 
 
 }

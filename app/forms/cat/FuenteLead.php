@@ -8,10 +8,10 @@
         <p class="lead">Fuentes</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idFuenteLead" >
+            <!-- <input type="hidden" class="form-control" id="idFuenteLead" > -->
             <div class="form-group">
                 <label for="nombreFuente">Nombre de Fuente</label>
-                <input type="text" class="form-control" id="nombreFuente" >
+                <input type="text" class="form-control" id="nombreFuente">
             </div>
             <!--
             <div class="form-group">
@@ -21,7 +21,7 @@
                     <option value="N">No</option>              
                 </select>
             </div>
--->
+            -->
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFuentesLead()">Buscar</button>
                 <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
@@ -47,7 +47,7 @@
         </div>
         <div class="modal-body">
             <form id="frmFuenteLeadModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idFuenteLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombreFuente1" class="form-control-label">Fuentes</label>
@@ -80,7 +80,6 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Eliminación de Registro</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -119,9 +118,9 @@ getFuenteLead = function(){
             }
         }
     }); 
-
 }
 
+ // ---------------------->
 
 buildGridFuenteLead= function (data, total){
     var html = "<table id='tblFuenteLead' class='table table table-hover'>";                 
@@ -137,30 +136,29 @@ buildGridFuenteLead= function (data, total){
     html += '<tbody class="list">';   
 
     for(var i=0; i<count; i++){
-        //Pa.IdParticipante, Pa.PrimerNombre, Pa.SegundoNombre, Pa.ApellidoPaterno, Pa.ApellidoMaterno, Pa.Email, Pa.Telefono, Pa.Referencia, EP.Nombre as Estatus, Em.NombreCorto, EV.Nombre as Evento
         html += '<tr>';     
         html += ' <th scope="row">';     
         html += ' <div class="media-body">';     
         html += '  <span class="name mb-0 text-sm">';                              
         html += data[i].nombreFuente;
         html += '</span>';  
-            html += '</div>';  
+        html += '</div>';  
         html += ' </td>';     
         html += ' <td>';   
         html += data[i].activo;  
         html += ' </td>';     
         html += ' <td>';     
-        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmFuenteLead" ><i class="fas fa-edit"></i></button>';
+        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoFuenteLead(' + data[i].idFuenteLead + ')" data-toggle="modal" data-target="#modalFrmFuenteLead" ><i class="fas fa-edit"></i></button>';
         html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmFuenteLeadEliminar"><i class="fas fa-trash"></i></button>' ;   
-
     } 
-
     return html += "</table>";  
 }
+
+// --------------------------->
+
 searchFuentesLead = function(){
         var nombreFuente = $("#nombreFuente").val(); 
-          
             $.ajax({
             method: "POST",
             url: "controller/FuenteLeadController.php",            
@@ -186,8 +184,7 @@ searchFuentesLead = function(){
         });
     }
 
-
-
+// ------------------------------>
 
     saveFuenteLead = function(){
         var nombreFuente = $("#nombreFuente1").val(); 
@@ -202,26 +199,51 @@ searchFuentesLead = function(){
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){              
                 if(result.status === "ok"){
-                  // alert("sgundo if");
-                //  console.log(result.status);  
-                   // data = result.data;
-                   //console.log(result.data);
                    data = result.data;
-                   alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                   alert("Registro guardado");  
                 } 
             }
         });
     }
+// --------------------------> 
+
+loadInfoFuenteLead = function(idFuenteLead){
+        $.ajax({
+                method: "POST",
+                url: "controller/FuenteLeadController.php",            
+                data: { 
+                    action: "selectById",
+                    idFuenteLead: idFuenteLead                         
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreFuente1").val(data[0].nombreFuente);
+                   $("#activo").val(data[0].activo);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveFuenteLead()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// ------------------------>
 
 eliminar = function(){
 
 }    
+
+// -------------------------->
+
 $(document).ready(function () {
-           // alert("hola");
+        
         getFuenteLead();
     });
 

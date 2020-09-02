@@ -8,7 +8,7 @@
         <p class="lead">Etapas de las Citas</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idEtapaCita" >
+            <!-- <input type="hidden" class="form-control" id="idEtapaCita" > -->
             <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapa" >
@@ -89,7 +89,6 @@
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary"  value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()">Guardar Cambios</button>
-        <!-- <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()">Guardar Cambios</button> -->
         </div>
       </div>
     </div>
@@ -124,7 +123,7 @@
 
 
 <script>
-//   get ------------>
+// --------------------->
     getEtapasCitas = function(){
         $.ajax({
             method: "POST",
@@ -144,7 +143,7 @@
         }); 
     }
 
-//   grid ------------>
+// ------------------------->
     buildGridEtapas = function (data, total){
         var html = "<table id='tblEtapasCitas' class='table table table-hover'>";                 
         var data = data;
@@ -161,7 +160,6 @@
         html += '<tbody class="list">';   
  
         for(var i=0; i<count; i++){
-            //Pa.IdParticipante, Pa.PrimerNombre, Pa.SegundoNombre, Pa.ApellidoPaterno, Pa.ApellidoMaterno, Pa.Email, Pa.Telefono, Pa.Referencia, EP.Nombre as Estatus, Em.NombreCorto, EV.Nombre as Evento
             html += '<tr>';     
             html += ' <th scope="row">';     
             html += ' <div class="media-body">';     
@@ -180,7 +178,7 @@
             html += data[i].activo;  
             html += ' </td>';     
             html += ' <td>';        
-            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmEtapasCitas" ><i class="fas fa-edit"></i></button>'
+            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoEtapasCitas(' + data[i].idEtapaCita + ')" data-toggle="modal" data-target="#modalFrmEtapasCitas" ><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmEtapasCitasEliminar"><i class="fas fa-trash"></i></button>'    
             
@@ -190,7 +188,7 @@
     }
 
 
-//   search ------------>
+// ---------------------------->
     searchEtapasCitas = function(){
         var nombreEtapa= $("#nombreEtapa").val();
         var descripcionEtapa = $("#descripcionEtapa").val();
@@ -225,7 +223,7 @@
         });
     }
 
-//   save  ------------>
+// ---------------------------------->
 
 saveEtapasCitas = function(){
         var nombreEtapa= $("#nombreEtapa1").val()
@@ -245,12 +243,8 @@ saveEtapasCitas = function(){
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){    
                 if(result.status === "ok"){
-                //   alert("sgundo if");
-                 // console.log(result.status);  
-                   // data = result.data;
                    data = result.data
                    alert("Registro guardado");
                 } 
@@ -258,14 +252,42 @@ saveEtapasCitas = function(){
         });
     }
     
+// --------------------------->
 
+loadInfoEtapasCitas = function(idEtapaCita){
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasCitasController.php",            
+                data: { 
+                    action: "selectById",
+                    idEtapaCita: idEtapaCita                          
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreEtapa1").val(data[0].nombreEtapa);
+                   $("#descripcionEtapa").val(data[0].descripcionEtapa);
+                   $("#orden").val(data[0].orden);
+                   $("#activo").val(data[0].activo);
+                 
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveEtapasCitas()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
 
-//    ------------>
+// --------------->
     eliminar = function(){
     }  
-//   ------------>
+// --------------->
     $(document).ready(function (){
-               // alert("hola");
             getEtapasCitas();
         });
 

@@ -56,8 +56,15 @@ switch($action){
         $tables = "etapaslead";
         $fields = "idEtapaLead, nombreEtapa, descripcionEtapa, orden, activo";
         $where  = "";
-        echo $ParticipantesModel->selectParticipante($tables, $fields, $where);
+        echo $EtapasLeadModel->selectEtapasLead($tables, $fields, $where);
     break;
+    case "selectById":
+        $tables = "etapaslead";
+        $fields = "*";
+        $where  = "idEtapaLead='" . $idEtapaLead . "'";
+        echo $EtapasLeadModel->selectEtapasLead($tables, $fields, $where);
+    break;
+
 
 }
 

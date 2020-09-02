@@ -154,8 +154,6 @@
             html += data[i].Activo;
             html += '</td>'; 
             html += '<td>'; 
-            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" onclick="loadInfoAgencias1(' + data[i].IdAgencia + ')" data-toggle="modal" data-target="#modalFrmAgencias" ><i class="fas fa-edit"></i></button>';
-           // "loadInfoAgencias1(' + data[i].idAgencia + ')" data-toggle="modal" data-target="##modalFrmAgencias"
             html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoAgencias(' + data[i].IdAgencia + ')" data-toggle="modal" data-target="#modalFrmAgencias" ><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger " data-toggle="modal" data-target="#modalFrmAgenciasEliminar"><i class="fas fa-trash"></i></button>'    
@@ -166,6 +164,7 @@
 
     return html += "</table>";  
     }
+
 //  Search  ------------>
     searchAgencia = function(){
         var Nombre = $("#Nombre").val(); 
@@ -220,16 +219,44 @@
             }
         });
     }
-    
+
+    // ------------------>
+    saveAgencias = function(){
+        var IdAgencia = $("#IdAgencia").val();
+        var Nombre = $("#Nombre1").val();
+        var Activo = $("#Activo").val();
+        $.ajax({
+                method: "POST",
+                url: "controller/AgenciasController.php",            
+                data: { 
+                    action: "update",                         
+                    Nombre: Nombre,
+                    activo: activo                                                                                
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                //   alert("sgundo if");
+                 // console.log(result.status);  
+                   // data = result.data;
+                   data = result.data
+                   alert("Registro guardado");
+                } 
+            }
+        });
+    }
     
 //------------->
-loadInfoAgencias = function(idAgencia){
+loadInfoAgencias = function(IdAgencia){
         $.ajax({
                 method: "POST",
                 url: "controller/AgenciasController.php",            
                 data: { 
                     action: "selectById",
-                    idAgencia: idAgencia                          
+                    IdAgencia: IdAgencia                          
                 },
                 dataType: "json"
         })
@@ -237,27 +264,20 @@ loadInfoAgencias = function(idAgencia){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                  // $("#IdAgencia").val(data[0].IdAgencia);
                    $("#Nombre1").val(data[0].Nombre);
                    $("#Activo").val(data[0].Activo);
+
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '';     
-                       
-      //  <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar Cambios</button>
-                    if($("#idAgencia").val() != ""){
-                        btnGuardar = '<button type="button" onclick="saveAgencias()" class="btn btn-primary">Guardar</button>';  
-                    } else {
-                        alert("intenta nuevamente");  
-                    }
+                    var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Actualizar</button>';                               
                     var html = "";
-                    html += btnCerrar + btnGuardar;                   
+                    html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
                 }
             }
         });
     }
   //   ------------>
-  loadInfoAgencias1 = function(idAgencia){
+  /* loadInfoAgencias1 = function(IdAgencia){
         $.ajax({
                 method: "POST",
                 url: "controller/AgenciasController.php",            
@@ -274,37 +294,45 @@ loadInfoAgencias = function(idAgencia){
                    $("#nombre1").val(data[0].Nombre);
                    $("#Activo1").val(data[0].Activo);
                    
-                    
-                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" class="btn btn-primary">Guardar</button>';
-                    var btnFactura = '<button type="button" class="btn btn-primary">Factura</button>';
-                    var btnPago = '<button type="button" class="btn btn-primary">Pago</button>';
 
-                    var html = "";
-                    html += btnCerrar + btnGuardar + btnFactura;
-
-                   
-
-                    $("#divBtnModal").html(html);
+                  $("#divBtnModal").html();
                 }
             }
         });
     }
-
+ */
   // ----------->
-//borra
-/*
-    deleteAgencia = function(){
-        $(document).on('click','btn-delete',function(e){
-            e.preventDefault();
-           // var row = $(this).parent().parent()[0];
-          //  console.log(row);
-            var data = tabla.ftGetData(1);
-            console.log(data);
-       });
-    } 
 
-    */
+
+deleteAgencias = function(IdAgencia){
+        var IdAgencia = $("#IdAgencia").val();
+        var Nombre = $("#Nombre1").val();
+        var Activo = $("#Activo").val();
+        $.ajax({
+                method: "POST",
+                url: "controller/AgenciasController.php",            
+                data: { 
+                    action: "delete",                         
+                    IdAgencia: IdAgencia                                                                                
+                },
+                dataType: "json"
+        })
+        .done(function(result) {
+            if( result != "" ){   
+              //  alert("primer if");            
+                if(result.status === "ok"){
+                //   alert("sgundo if");
+                 // console.log(result.status);  
+                   // data = result.data;
+                   data = result.data
+                   alert("Registro guardado");
+                } 
+            }
+        });
+    }
+    
+
+    
     /*
 //refresh
     load = function(){
@@ -344,9 +372,6 @@ loadInfoAgencias = function(idAgencia){
     
         getAgencias();
             });
-
-
-
 
 
 </script>

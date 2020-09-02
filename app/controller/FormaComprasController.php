@@ -54,6 +54,14 @@ switch($action){
         echo $MetodoCompraModel->selectMetodoCompra($tables, $fields, $where);
     break;
 
+    case "selectById":
+        $tables = "metodoscompras";
+        $fields = "*";
+        $where  = "idMetodoCompra='" . $idMetodoCompra . "'";
+         echo $MetodoCompraModel->selectMetodoCompra($tables, $fields, $where);
+    break;
+
+
 
 }
 

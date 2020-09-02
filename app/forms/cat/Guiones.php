@@ -8,7 +8,7 @@
         <p class="lead">Formas</p>
         <hr class="my-4">
         <form id= "guiones">
-            <input type="hidden" class="form-control" id="idPlantillaGuion" >
+            <!-- <input type="hidden" class="form-control" id="idPlantillaGuion" > -->
             <div class="form-group">
                 <label for="nombrePlantillaGuion">Nombre de Plantilla - Guión</label>
                 <input type="text" class="form-control" id="nombrePlantillaGuion" >
@@ -46,20 +46,30 @@
         </div>
         <div class="modal-body">
             <form id="frmGuionesModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idPlantillasGuion">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombrePlantillaGuion1" class="form-control-label">Nombre</label>
                         <input class="form-control" type="text" value="" id="nombrePlantillaGuion1">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label for="Activo" class="form-control-label">Activo</label>
-                        <select class="form-control" id="Activo">
+                        <label for="descripcion" class="form-control-label">Descripción</label>
+                        <input class="form-control" type="text" value="" id="descripcion">
+                    </div>                         
+                </div> 
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="orden" class="form-control-label">orden</label>
+                        <input class="form-control" type="text" value="" id="orden">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="activo" class="form-control-label">Activo</label>
+                        <select class="form-control" id="activo">
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
                     </div>                         
-                </div>                                                                                                                                      
+                </div>                                                                                                                                         
                                             
             </form>           
         </div>
@@ -110,8 +120,7 @@ getGuiones = function(){
     })
     .done(function( result ) {
         if( result != "" ){               
-            if(result.status === "ok"){   
-                //console.log(result.status);                     
+            if(result.status === "ok"){                       
                 var html = buildGridGuiones(result.data, result.total);
                 $("#divDataTableGuiones").html(html);
                 $('#tblGuiones').DataTable();                   
@@ -161,7 +170,7 @@ buildGridGuiones= function (data, total){
         html += data[i].orden;  
         html += '</td>';     
         html += '<td>';        
-        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmGuiones" ><i class="fas fa-edit"></i></button>'
+        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoGuiones(' + data[i].idPlantillaGuion + ')" data-toggle="modal" data-target="#modalFrmGuiones" ><i class="fas fa-edit"></i></button>';
         html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmGuionesEliminar"><i class="fas fa-trash"></i></button>'    
         html += '</td>';  
@@ -198,6 +207,7 @@ searchGuiones = function(){
         });
     }
 
+// ----------------->
 
     saveGuiones = function(){
         var nombrePlantillaGuion = $("#nombrePlantillaGuion1").val(); 
@@ -212,26 +222,51 @@ searchGuiones = function(){
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){             
                 if(result.status === "ok"){
-                  // alert("sgundo if");
-                //  console.log(result.status);  
-                   // data = result.data;
-                   //console.log(result.data);
                    data = result.data;
-                   alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                   alert("Registro guardado"); 
                 } 
             }
         });
     }
 
+// -------------------->
+loadInfoGuiones = function(idPlantillaGuion){
+        $.ajax({
+                method: "POST",
+                url: "controller/GuionesController.php",            
+                data: { 
+                    action: "selectById",
+                    idPlantillaGuion: idPlantillaGuion                         
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombrePlantillaGuion1").val(data[0].nombrePlantillaGuion);
+                   $("#descripcion").val(data[0].descripcion);
+                   $("#orden").val(data[0].orden);
+                   $("#activo").val(data[0].activo);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveGuiones()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// -------------------->
+
 eliminar = function(){
 
 }    
+// ------------------------->
+
 $(document).ready(function () {
-           // alert("hola");
         getGuiones();
     });
 

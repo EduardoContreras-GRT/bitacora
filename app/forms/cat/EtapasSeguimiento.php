@@ -8,10 +8,10 @@
         <p class="lead">Etapas</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idEtapaSeguimiento">
+            <!-- <input type="hidden" class="form-control" id="idEtapaSeguimiento"> -->
             <div class="form-group">
-                <label for="nombreEtapaSeguimiento1">Nombre de Etapa</label>
-                <input type="text" class="form-control" id="nombreEtapaSeguimiento1">
+                <label for="nombreEtapaSeguimiento">Nombre de Etapa</label>
+                <input type="text" class="form-control" id="nombreEtapaSeguimiento">
             </div>
             <!--
             <div class="form-group">
@@ -50,8 +50,8 @@
                 <input type="hidden" value="" id="idEtapaSeguimiento">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreEtapaSeguimiento" class="form-control-label">Nombre de Etapa</label>
-                        <input type="text" class="form-control" id="nombreEtapaSeguimiento">
+                        <label for="nombreEtapaSeguimiento1" class="form-control-label">Nombre de Etapa</label>
+                        <input type="text" class="form-control" id="nombreEtapaSeguimiento1">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="activo" class="form-control-label">Activo</label>
@@ -121,7 +121,7 @@
         }); 
 
     }
-
+ //----------------------->
 
     buildGridEtapasSeguimiento = function (data, total){
         var html = "<table id='tblEtapaSeguimiento' class='table table table-hover'>";                 
@@ -149,18 +149,15 @@
             html += data[i].activo;  
             html += ' </td>';     
             html += ' <td>';     
-             html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento" ><i class="fas fa-edit"></i></button>'
+            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoEtapasSeguimiento(' + data[i].idEtapaSeguimiento + ')" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento" ><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmEtapasSeguimientoEliminar"><i class="fas fa-trash"></i></button>'    
-            
-
-    
-
         } 
 
         return html += "</table>";  
     }
 
+// ---------------------------------->
 
     searchEtapasSeguimientos = function(){
         var nombreEtapaSeguimiento = $("#nombreEtapaSeguimiento1").val(); 
@@ -190,6 +187,7 @@
             }
         });
     }
+// ------------------------------>
 
     saveEtapasSeguimiento = function(){
         var nombreEtapaSeguimiento = $("#nombreEtapaSeguimiento").val(); 
@@ -204,27 +202,47 @@
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){           
                 if(result.status === "ok"){
-                  // alert("sgundo if");
-                //  console.log(result.status);  
-                   // data = result.data;
-                   //console.log(result.data);
                    data = result.data;
                    alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
                 } 
             }
         });
     }
+// --------------------->
+loadInfoEtapasSeguimiento = function(idEtapaSeguimiento){
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasSeguimientoController.php",            
+                data: { 
+                    action: "selectById",
+                    idEtapaSeguimiento: idEtapaSeguimiento                          
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreEtapaSeguimiento1").val(data[0].nombreEtapaSeguimiento);
+                   $("#activo").val(data[0].Activo);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveEtapasSeguimiento()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// -------------------------->
 
     eliminar = function(){
 
     }    
-
+/// ------------------------->
     $(document).ready(function () {
-               // alert("hola");
             getEtapasSeguimiento();
         });
 

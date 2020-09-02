@@ -3,7 +3,7 @@ include_once '../model/EtapasCitasModel.Class.php';
 include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
-@$idEtapaCitas = $_POST["idEtapaCita"];
+@$idEtapaCita = $_POST["idEtapaCita"];
 @$nombreEtapa = $_POST["nombreEtapa"];
 @$descripcionEtapa = $_POST["descripcionEtapa"];
 @$orden = $_POST["orden"];
@@ -65,6 +65,16 @@ switch($action){
         $where  = " nombreEtapa='" . $nombreEtapa . "'";
         echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
     break;
+
+    case "selectById":
+        $tables = "etapascitas";
+        $fields = "*";
+        $where  = "idEtapaCita='" . $idEtapaCita . "'";
+        echo $EtapasCitasModel->selectEtapasCitas($tables, $fields, $where);
+    break;
+
+
+
 
 
 }

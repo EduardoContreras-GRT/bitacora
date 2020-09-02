@@ -57,6 +57,14 @@ switch($action){
         echo $GuionesModel->selectGuiones($tables, $fields, $where);
     break;
 
+    case "selectById":
+        $tables = "plantillasguiones";
+        $fields = "*";
+        $where  = "idPlantillaGuion='" . $idPlantillaGuion . "'";
+        echo $GuionesModel->selectGuiones($tables, $fields, $where);
+    break;
+
+
 }
 
 

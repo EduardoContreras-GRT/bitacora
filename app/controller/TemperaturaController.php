@@ -46,11 +46,19 @@ switch($action){
         $where  = "";
         echo $TemperaturaModel->selectTemperatura($tables, $fields, $where);
     break;
+    
     case "selectByName":
         $tables = "Temperaturaslead";
         $fields = "*";
         $where  =" nombreTemperatura='" . $nombreTemperatura . "'";
        echo $TemperaturaModel->selectTemperatura($tables, $fields, $where);
+    break;
+
+    case "selectById":
+        $tables = "Temperaturaslead";
+        $fields = "*";
+        $where  = "idTemperaturaLead='" . $idTemperaturaLead . "'";
+        echo $TemperaturaModel->selectTemperatura($tables, $fields, $where);
     break;
 
 }

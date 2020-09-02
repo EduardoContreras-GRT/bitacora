@@ -53,6 +53,13 @@ switch($action){
         $where  =" nombreFuente='" . $nombreFuente . "'";
         echo $FuentesLeadModel->selectFuentesLead($tables, $fields, $where);
     break;
+      
+    case "selectById":
+        $tables = "fuenteslead";
+        $fields = "*";
+        $where  = "idFuenteLead='" . $idFuenteLead . "'";
+        echo $FuentesLeadModel->selectFuentesLead($tables, $fields, $where);
+    break;
 
 
 }

@@ -8,7 +8,7 @@
         <p class="lead">tipo</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idTemperaturaLead" >
+            <!-- <input type="hidden" class="form-control" id="idTemperaturaLead" > -->
             <div class="form-group">
                 <label for="nombreTemperatura">Nombre</label>
                 <input type="text" class="form-control" id="nombreTemperatura" >
@@ -46,7 +46,7 @@
         </div>
         <div class="modal-body">
             <form id="frmTemperaturasModal">
-                <input type="hidden" value="" id="IdAgencia">
+                <input type="hidden" value="" id="idTemperaturaLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombreTemperatura1" class="form-control-label">Temperaturas</label>
@@ -54,8 +54,8 @@
                     </div>
                     
                     <div class="col-lg-6 col-md-6">
-                        <label for="Activo" class="form-control-label">Activo</label>
-                        <select class="form-control" id="Activo">
+                        <label for="activo" class="form-control-label">Activo</label>
+                        <select class="form-control" id="activo">
                             <option value="S">Si</option>
                             <option value="N">No</option>
                         </select>
@@ -112,8 +112,7 @@ getTemperaturas = function(){
     })
     .done(function( result ) {
         if( result != "" ){               
-            if(result.status === "ok"){   
-                //console.log(result.status);                     
+            if(result.status === "ok"){                       
                 var html = buildGridTemperaturas(result.data, result.total);
                 $("#divDataTemperaturas").html(html);
                 $('#tblTemperaturas').DataTable();                   
@@ -123,6 +122,7 @@ getTemperaturas = function(){
 
 }
 
+// -------------------->
 
 buildGridTemperaturas= function (data, total){
     var html = "<table id='tblTemperaturas' class='table table table-hover'>";                 
@@ -138,7 +138,6 @@ buildGridTemperaturas= function (data, total){
     html += '<tbody class="list">';   
 
     for(var i=0; i<count; i++){
-        //Pa.IdParticipante, Pa.PrimerNombre, Pa.SegundoNombre, Pa.ApellidoPaterno, Pa.ApellidoMaterno, Pa.Email, Pa.Telefono, Pa.Referencia, EP.Nombre as Estatus, Em.NombreCorto, EV.Nombre as Evento
         html += '<tr>';     
         html += '<th scope="row">';     
         html += '<div class="media-body">';     
@@ -151,21 +150,18 @@ buildGridTemperaturas= function (data, total){
         html += data[i].activo;  
         html += '</td>';     
         html += '<td>';     
-        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmTemperaturas" ><i class="fas fa-edit"></i></button>'
+        html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoTemperatura(' + data[i].idTemperaturaLead + ')" data-toggle="modal" data-target="#modalFrmTemperaturas" ><i class="fas fa-edit"></i></button>';
         html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmTemperaturasEliminar"><i class="fas fa-trash"></i></button>'    
         html += '</td>';    
-
-
-
     } 
-
     return html += "</table>";  
 }
 
+// ---------------->
+
 searchTemperaturas = function(){
         var nombreTemperatura = $("#nombreTemperatura").val(); 
-          
             $.ajax({
             method: "POST",
             url: "controller/TemperaturaController.php",            
@@ -191,10 +187,10 @@ searchTemperaturas = function(){
         });
     }
 
+// --------------------->
 
     saveTemperaturas = function(){
         var nombreTemperatura = $("#nombreTemperatura1").val(); 
-
         $.ajax({
                 method: "POST",
                 url: "controller/TemperaturaController.php",            
@@ -205,27 +201,49 @@ searchTemperaturas = function(){
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){               
                 if(result.status === "ok"){
-                  // alert("sgundo if");
-                //  console.log(result.status);  
-                   // data = result.data;
-                   //console.log(result.data);
                    data = result.data;
-                   alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
+                   alert("Registro guardado");  
                 } 
             }
         });
     }
 
+// -------------------------------->
+loadInfoTemperatura = function(idTemperaturaLead){
+        $.ajax({
+                method: "POST",
+                url: "controller/TemperaturaController.php",            
+                data: { 
+                    action: "selectById",
+                    idTemperaturaLead: idTemperaturaLead                      
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreTemperatura1").val(data[0].nombreTemperatura);
+                   $("#activo").val(data[0].activo);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveTemperaturas()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// -------------------------------->
 
 eliminar = function(){
-
 }    
+
+// --------------------------------->
+
 $(document).ready(function () {
-           // alert("hola");
         getTemperaturas();
     });
 

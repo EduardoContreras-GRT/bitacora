@@ -8,7 +8,7 @@
         <p class="lead">Formas</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idMetodoCompra" >
+            <!-- <input type="hidden" class="form-control" id="idMetodoCompra" > -->
             <div class="form-group">
                 <label for="nombreMetodoCompra">Metodo de Compra</label>
                 <input type="text" class="form-control" id="nombreMetodoCompra" >
@@ -111,17 +111,16 @@
         })
         .done(function( result ) {
             if( result != "" ){               
-                if(result.status === "ok"){   
-                    //console.log(result.status);                     
+                if(result.status === "ok"){                     
                     var html = buildGridFormaCompra(result.data, result.total);
                     $("#divDataTableFormaCompra").html(html);
                     $('#tblFormaCompra').DataTable();                   
                 }
             }
         }); 
-
     }
 
+// ---------------------->
 
     buildGridFormaCompra= function (data, total){
         var html = "<table id='tblFormaCompra' class='table table table-hover'>";                 
@@ -137,7 +136,6 @@
         html += '<tbody class="list">';   
  
         for(var i=0; i<count; i++){
-            //Pa.IdParticipante, Pa.PrimerNombre, Pa.SegundoNombre, Pa.ApellidoPaterno, Pa.ApellidoMaterno, Pa.Email, Pa.Telefono, Pa.Referencia, EP.Nombre as Estatus, Em.NombreCorto, EV.Nombre as Evento
             html += '<tr>';     
             html += ' <th scope="row">';     
             html += ' <div class="media-body">';     
@@ -150,17 +148,13 @@
             html += data[i].activo;  
             html += ' </td>';     
             html += ' <td>';     
-            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmFormaCompra" ><i class="fas fa-edit"></i></button>'
+            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoFormaCompra(' + data[i].idMetodoCompra + ')" data-toggle="modal" data-target="#modalFrmFormaCompra" ><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
             html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmFormaCompraEliminar"><i class="fas fa-trash"></i></button>'    
-            
-
-    
-
         } 
-
         return html += "</table>";  
     }
+// ------------------------->
 
     searchFormaCompra = function(){
         var nombreMetodoCompra = $("#nombreMetodoCompra").val(); 
@@ -189,6 +183,7 @@
             }
         });
     }
+// -------------------------->
 
     saveFormaCompra = function(){
         var nombreMetodoCompra = $("#nombreMetodoCompra1").val(); 
@@ -203,26 +198,49 @@
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){              
                 if(result.status === "ok"){
-                  // alert("sgundo if");
-                //  console.log(result.status);  
-                   // data = result.data;
-                   //console.log(result.data);
                    data = result.data;
                    alert("Registro guardado");
-                  // $("#IdAgencia").val(data[0].IdAgencia);  
                 } 
             }
         });
     }
 
+// ----------------------->
+
+loadInfoFormaCompra = function(idMetodoCompra){
+        $.ajax({
+                method: "POST",
+                url: "controller/FormaComprasController.php",            
+                data: { 
+                    action: "selectById",
+                    idMetodoCompra: idMetodoCompra                         
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreMetodoCompra1").val(data[0].nombreMetodoCompra);
+                   $("#activo").val(data[0].activo);
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveFormaCompra()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+// ----------------------->
     eliminar = function(){
 
-    }    
+    }   
+    
+// ----------------------->
     $(document).ready(function () {
-               // alert("hola");
             getFormaCompra();
         });
 

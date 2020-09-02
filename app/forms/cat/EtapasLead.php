@@ -8,10 +8,10 @@
         <p class="lead">Etapas Lead</p>
         <hr class="my-4">
         <form>
-            <input type="hidden" class="form-control" id="idEtapaLead" >
+            <!-- <input type="hidden" class="form-control" id="idEtapaLead" > -->
             <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
-                <input type="text" class="form-control" id="nombreEtapa" >
+                <input type="text" class="form-control" id="nombreEtapa">
             </div>
             <!--
             <div class="form-group">
@@ -142,6 +142,7 @@
 
     }
 
+// ------------------------------>
 
     buildGridEtapasLead = function (data, total){
         var html = "<table id='tblEtapasLead' class='table table table-hover'>";                 
@@ -159,7 +160,6 @@
         html += '<tbody class="list">';   
  
         for(var i=0; i<count; i++){
-            //Pa.IdParticipante, Pa.PrimerNombre, Pa.SegundoNombre, Pa.ApellidoPaterno, Pa.ApellidoMaterno, Pa.Email, Pa.Telefono, Pa.Referencia, EP.Nombre as Estatus, Em.NombreCorto, EV.Nombre as Evento
             html += '<tr>';     
             html += ' <th scope="row">';     
             html += ' <div class="media-body">';     
@@ -178,18 +178,15 @@
             html += data[i].activo;  
             html += ' </td>';     
             html += ' <td>';     
-            html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal" data-target="#modalFrmEtapasLead" ><i class="fas fa-edit"></i></button>'
+            html+= '<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoEtapasLead(' + data[i].idEtapaLead + ')" data-toggle="modal" data-target="#modalFrmEtapasLead"><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmEtapasLeadEliminar"><i class="fas fa-trash"></i></button>'    
-            
-
-    
-
+            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger" data-toggle="modal" data-target="#modalFrmEtapasLeadEliminar"><i class="fas fa-trash"></i></button>';    
         } 
 
         return html += "</table>";  
     }
 
+// --------------------------->
 
     searchEtapasLead = function(){
         var nombreEtapa = $("#nombreEtapa").val();
@@ -226,12 +223,7 @@
         });
     }
 
-
-   // Guarda   ------------>
- 
-
-
- //   save  ------------>
+// ------------------->
 
 saveEtapasLead = function(){
         var nombreEtapa= $("#nombreEtapa1").val()
@@ -251,27 +243,51 @@ saveEtapasLead = function(){
                 dataType: "json"
         })
         .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
+            if( result != "" ){              
                 if(result.status === "ok"){
-                //   alert("sgundo if");
-                 // console.log(result.status);  
-                   // data = result.data;
                    data = result.data
                    alert("Registro guardado");
                 } 
             }
         });
-    }
-    
+    }    
 
- // --------------->
+ // ------------------->
+loadInfoEtapasLead = function(idEtapaLead){
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasLeadController.php",            
+                data: { 
+                    action: "selectById",
+                    idEtapaLead: idEtapaLead                          
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                   $("#nombreEtapa1").val(data[0].nombreEtapa);
+                   $("#descripcionEtapa").val(data[0].descripcionEtapa);
+                   $("#orden").val(data[0].orden);
+                   $("#activo").val(data[0].activo);
+                 
+                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                    var btnGuardar = '<button type="button" onclick="saveEtapasLead()" class="btn btn-primary">Actualizar</button>';                               
+                    var html = "";
+                    html += btnCerrar + btnGuardar;  
+                    $("#divBtnModal").html(html);
+                }
+            }
+        });
+    }
+
+// -------------------------->
     eliminar = function(){
 
     }   
-
+// --------------------------->
     $(document).ready(function () {
-               // alert("hola");
             getEtapasLead();
         });
 

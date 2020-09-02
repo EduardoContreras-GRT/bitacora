@@ -64,8 +64,6 @@ switch($action){
         $fields = "*";
         $where  = " IdAgencia='" . $IdAgencia . "'";
         echo $AgenciasModel->selectAgencias($tables, $fields, $where);
-
-    
     break;
 
 
