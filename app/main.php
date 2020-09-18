@@ -299,7 +299,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="assets/js/SimpleChart.js"></script>
         <!-- Bar-chart -->
         <script src="assets/js/rumcaJS.js"></script>
-        <script src="assets/js/example.js"></script>
+        <!-- <script src="assets/js/example.js"></script> -->
         <!--// Bar-chart -->
         <!-- Calender -->
         <script src="assets/js/moment.min.js"></script>
@@ -313,7 +313,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <link href="assets/css/simplyCountdown.css" rel='stylesheet' type='text/css' />
         <script src='assets/js/amcharts.js'></script>    
         <!-- Js for bootstrap working-->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <!-- <script src="assets/js/bootstrap.min.js"></script> -->
         <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
         <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
         
@@ -358,7 +358,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="assets/js/plugins/bootstrap-notify.js"></script>
         <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-
 
         <script>
             changePage = function (page, tipo = ""){
