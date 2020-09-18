@@ -27,7 +27,10 @@ class AgenciasModel{
         $this->idValues = $idValues;
         $dataArray = ["table" => $this->table, "idValues" => $this->idValues ,"data" => $this->data];
         $Connection = new Connect();
-        return $Connection->update($dataArray);
+       return $Connection->update($dataArray); 
+       //echo ($dataArray);
+     //  echo ("<script>console.log('PHP: ".$data."');<script>");
+       
     }
 
     public function deleteAgencias($idValues = []){      

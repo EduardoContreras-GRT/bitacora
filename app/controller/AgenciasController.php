@@ -4,7 +4,7 @@ include_once '../lib/arraysParams/arraysParams.php';
 
 @$action = $_POST["action"];
 @$IdAgencia = $_POST["IdAgencia"];
-@$Nombre = $_POST["Nombre"];
+@$NombreAgencia = $_POST["NombreAgencia"];
 @$Activo= $_POST["Activo"];
 @$FechaCrecion = $_POST["FechaCrecion"];
 @$FechaModificacion = $_POST["FechaModificacion"];
@@ -16,7 +16,7 @@ switch($action){
 
     case "insert":      
       $dataArray = [
-            "Nombre" => $Nombre,
+            "NombreAgencia" => $NombreAgencia,
             "Activo" => "S" 
        ]; 
       //  echo $AgenciasModel->insertAgencias($dataArray); 
@@ -55,7 +55,7 @@ switch($action){
     case "selectByName":
         $tables = "agencias";
         $fields = "*";
-        $where  = " Nombre='" . $Nombre . "'";
+        $where  = " NombreAgencia='" . $NombreAgencia . "'";
         echo $AgenciasModel->selectAgencias($tables, $fields, $where);
     break;
 

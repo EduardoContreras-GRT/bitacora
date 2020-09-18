@@ -17,13 +17,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             addEventListener("load", function () {
                 setTimeout(hideURLbar, 0);
             }, false);
-
             function hideURLbar() {
                 window.scrollTo(0, 1);
             }
         </script>
         <!-- //Meta Tags -->
-
         <!-- Style-sheets -->
         <!-- Bootstrap Css -->
         <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -44,13 +42,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <link href="assets/css/fontawesome-all.css" rel="stylesheet">
         <!--// Fontawesome Css -->
         <!--// Style-sheets -->
-
         <!--web-fonts-->
         <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <!--//web-fonts-->
     </head>
-
     <body>
         <div class="se-pre-con"></div>
         <div class="wrapper">
@@ -102,37 +98,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a href="#" onclick="changePage('asesores','cat');">Asesores</a>
                             </li>
                             <li id="cam-leads">
-                                <a href="#" onclick="changePage('cam-leads','cat');">Campa&ntilde;as de Lead</a>
+                                <a href="#" onclick="changePage('CampLead','cat');">Campa&ntilde;as de Lead</a>
                             </li>
                             <li id="eta-citas">
-                                <a href="#" onclick="changePage('eta-citas','cat');">Etapas de Citas</a>
+                                <a href="#" onclick="changePage('EtapasCitas','cat');">Etapas de Citas</a>
                             </li>
                             <li id="eta-leads">
-                                <a href="#" onclick="changePage('eta-leads','cat');">Etapas de Lead</a>
+                                <a href="#" onclick="changePage('EtapasLead','cat');">Etapas de Lead</a>
                             </li>
                             <li id="eta-seguimientos">
-                                <a href="#" onclick="changePage('eta-seguimientos','cat');">Etapas de Seguimientos</a>
+                                <a href="#" onclick="changePage('EtapasSeguimientos','cat');">Etapas de Seguimientos</a>
                             </li>
                             <li id="for-compra">
-                                <a href="#" onclick="changePage('for-compra','cat');">Forma de Compra</a>
+                                <a href="#" onclick="changePage('FormaCompra','cat');">Forma de Compra</a>
                             </li>
                             <li id="fue-lead">
-                                <a href="#" onclick="changePage('fue-lead','cat');">Fuentes de Lead</a>
+                                <a href="#" onclick="changePage('FuenteLead','cat');">Fuentes de Lead</a>
                             </li>
                             <li id="guiones">
-                                <a href="#" onclick="changePage('guiones','cat');">Guiones</a>
+                                <a href="#" onclick="changePage('Guiones','cat');">Guiones</a>
                             </li>
                             <li id="tip-temperatura">
-                                <a href="#" onclick="changePage('tip-temperatura','cat');">Temperatura</a>
+                                <a href="#" onclick="changePage('Temperaturas','cat');">Temperatura</a>
                             </li>
                             <li id="tip-asesores">
-                                <a href="#" onclick="changePage('tip-asesores','cat');">Tipos de asesores</a>
+                                <a href="#" onclick="changePage('TiposAsesores','cat');">Tipos de asesores</a>
                             </li>
                             <li id="tip-plantillas-guiones">
-                                <a href="#" onclick="changePage('tip-plantillas-guiones','cat');">Tipos de Plantillas Guiones</a>
+                                <a href="#" onclick="changePage('TiposPlantillasGuion','cat');">Tipos de Plantillas Guiones</a>
                             </li>
                             <li id="tip-seguimientos">
-                                <a href="#" onclick="changePage('tip-seguimientos','cat');">Tipos de seguimientos</a>
+                                <a href="#" onclick="changePage('TiposSeguimiento','cat');">Tipos de seguimientos</a>
                             </li>
                             <li id="usuarios">
                                 <a href="#" onclick="changePage('usuarios','cat');">Usuarios</a>
@@ -147,13 +143,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </li>                                        
                 </ul>
             </nav>
-
             <!-- Page Content Holder -->
             <div id="content">
                 <!-- top-bar -->
                 <nav class="navbar navbar-default mb-xl-5 mb-4">
                     <div class="container-fluid">
-
                         <div class="navbar-header">
                             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                                 <i class="fas fa-bars"></i>
@@ -283,7 +277,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </nav>
                 <!--// top-bar -->
                 <div id="divContainer" class="container-fluid">
-
                 </div>
               
                 <!-- Copyright -->
@@ -294,7 +287,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!--// Copyright -->
             </div>
         </div>
-
         <!-- Required common Js -->
         <script src='assets/js/jquery-2.2.3.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -322,26 +314,63 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src='assets/js/amcharts.js'></script>    
         <!-- Js for bootstrap working-->
         <script src="assets/js/bootstrap.min.js"></script>
-
         <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
         <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
-  
+        
+        <!--   Core JS Files   -->
+        <script src="assets/js/core/jquery.min.js"></script>
+        <script src="assets/js/core/popper.min.js"></script>
+        <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+        <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!-- Plugin for the momentJs  -->
+        <script src="assets/js/plugins/moment.min.js"></script>
+        <!--  Plugin for Sweet Alert -->
+        <script src="assets/js/plugins/sweetalert2.js"></script>
+        <!-- Forms Validations Plugin -->
+        <script src="assets/js/plugins/jquery.validate.min.js"></script>
+        <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+        <script src="assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+        <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+        <script src="assets/js/plugins/bootstrap-selectpicker.js"></script>
+        <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+        <script src="assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+        <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+        <script src="assets/js/plugins/jquery.dataTables.min.js"></script>
+        <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+        <script src="assets/js/plugins/bootstrap-tagsinput.js"></script>
+        <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+        <script src="assets/js/plugins/jasny-bootstrap.min.js"></script>
+        <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+        <script src="assets/js/plugins/fullcalendar.min.js"></script>
+        <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+        <script src="assets/js/plugins/jquery-jvectormap.js"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="assets/js/plugins/nouislider.min.js"></script>
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+        <!-- Library for adding dinamically elements -->
+        <script src="assets/js/plugins/arrive.min.js"></script>
+        <!--  Google Maps Plugin   
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+        <!-- Chartist JS -->
+        <script src="assets/js/plugins/chartist.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+
 
         <script>
-
             changePage = function (page, tipo = ""){
                 console.log(page);
                 var url = "forms/";
                 $("#divContainer").html();
-
                 $(".active").removeClass("active");
                 $("#"+page).addClass("nav-item active");
                 
                 url += (tipo=="")? page + ".php?" : "cat/" + page + ".php?";
-
                 $("#divContainer").load( url + new Date().getTime(), function() {                   
                 });
-
             };            
             
             
@@ -356,18 +385,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         $(this).toggleClass('open');
                     }
                 );
-
                 $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').toggleClass('active');
                 });
-
                 $(".se-pre-con").fadeOut("slow");
            
             });
-
         </script>
-
-
     </body>
-
 </html>
