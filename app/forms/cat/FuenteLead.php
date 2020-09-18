@@ -79,14 +79,16 @@
 <div class="modal fade" id="modalFrmFuenteLeadEliminar" tabindex="-1" role="dialog" aria-labelledby="modalFrmFuenteLeadEliminar" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-header">
+       <!-- <h5 class="modal-title" id="exampleModalLongTitle">Eliminación de Registro</h5> -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="frmFuenteLeadModal">  
-        <p>El registro que has seleccionado se eliminará permanentemente</p>
+        <form id="frmAgenciasModal">  
+       
+        <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
       <div class="modal-footer">

@@ -10,8 +10,8 @@
         <form id="frmAgencias">
            <!-- <input type="hidden" class="form-control" id="IdAgencia"> -->
             <div class="form-group">
-                <label for="Nombre">Nombre de Agencia</label>
-                <input type="text" class="form-control" id="Nombre" required>
+                <label for="NombreAgencia1">Nombre de Agencia</label>
+                <input type="text" class="form-control" id="NombreAgencia1" required>
             </div>
             <!--
             <div class="form-group">
@@ -51,8 +51,8 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                    <label for="Nombre1">Nombre de Agencia</label>
-                        <input type="text" class="form-control" id="Nombre1" >    
+                    <label for="NombreAgencia">Nombre de Agencia</label>
+                        <input type="text" class="form-control" id="NombreAgencia">    
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
@@ -68,7 +68,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveAgencias()"  data-dismiss="modal">Guardar Cambios</button>
         
         </div>
       </div>
@@ -88,8 +88,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="frmAgenciasModal">  
-       
+        <form id="frmAgenciasModal1">  
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
@@ -120,7 +119,7 @@
                    // console.log(result.status);                     
                     var html = buildGridAgencias(result.data, result.total);
                     $("#divDataTableAgencias").html(html);
-                    $('#tblAgencias');                   
+                    $('#tblAgencias').DataTable();   
                 }
             }
         });
@@ -128,7 +127,7 @@
 
 //    GRID ------------>
     buildGridAgencias = function (data, total){
-        var html = "<table id='tblAgencias' class='table table table-hover'>";                 
+        var html = "<table id='tblAgencias' class='table table-hover'>";                 
         var data = data;
         var count = total;     
         html += '<thead class="thead-light">';                                                 
@@ -146,7 +145,7 @@
             html += '<th scope="row">'; 
             html += '<div class="media-body">';     
             html += '<span class="name mb-0 text-sm">';      
-            html += data[i].Nombre;
+            html += data[i].NombreAgencia;
             html += '</span>';  
             html += '</div>';  
             html += '</td>';     
@@ -156,7 +155,7 @@
             html += '<td>'; 
             html+='<button value="Actualizar" title="Actualizar" class="btn btn-primary" data-toggle="modal"  onclick="loadInfoAgencias(' + data[i].IdAgencia + ')" data-toggle="modal" data-target="#modalFrmAgencias" ><i class="fas fa-edit"></i></button>';
             html+= '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger " data-toggle="modal" data-target="#modalFrmAgenciasEliminar"><i class="fas fa-trash"></i></button>'    
+            html+='<button value= "Eliminar" title="Eliminar" class="btn btn-danger " data-toggle="modal" onclick="deleteAgencias()" data-target="#modalFrmAgenciasEliminar"><i class="fas fa-trash"></i></button>'    
             html += '</div>';
             html += '</div>';
             html += '</td>';
@@ -167,13 +166,13 @@
 
 //  Search  ------------>
     searchAgencia = function(){
-        var Nombre = $("#Nombre").val(); 
+        var NombreAgencia = $("#NombreAgencia1").val(); 
             $.ajax({
             method: "POST",
             url: "controller/AgenciasController.php",            
             data: { 
                 action: "selectByName", 
-                Nombre: Nombre
+                NombreAgencia: NombreAgencia
             },
             dataType: "json"
         })
@@ -182,7 +181,7 @@
                 if(result.status === "ok"){     
                     var html = buildGridAgencias(result.data, result.total);
                     $("#divDataTableAgencias").html(html);
-                    $('#tblAgencias').DataTable();                                                   
+                    $('#tblAgencias');                                                   
                 }else{
                     $("#divDataTableAgencias").html("Sin Resultados");
                 }
@@ -195,14 +194,14 @@
 // Guarda   ------------>
     saveAgencias = function(){
         var IdAgencia = $("#IdAgencia").val();
-        var Nombre = $("#Nombre1").val();
+        var NombreAgencia = $("#NombreAgencia").val();
         var Activo = $("#Activo").val();
         $.ajax({
                 method: "POST",
                 url: "controller/AgenciasController.php",            
                 data: { 
                     action: "insert",                         
-                    Nombre: Nombre                                                                                
+                    NombreAgencia: NombreAgencia                                                                                
                 },
                 dataType: "json"
         })
@@ -221,34 +220,115 @@
     }
 
     // ------------------>
-    saveAgencias = function(){
+    // saveAgencias = function(){
+    //     var IdAgencia = $("#IdAgencia").val();
+    //     var Nombre = $("#Nombre1").val();
+    //     var Activo = $("#Activo").val();
+    //     $.ajax({
+    //             method: "POST",
+    //             url: "controller/AgenciasController.php",            
+    //             data: { 
+    //                 action: "insert",                         
+    //                 Nombre: Nombre,
+    //                 Activo: Activo                                                                                
+    //             },
+    //             dataType: "json"
+    //     })
+    //     .done(function(result) {
+    //         if( result != "" ){   
+    //           //  alert("primer if");            
+    //             if(result.status === "ok"){
+    //             //   alert("sgundo if");
+    //              // console.log(result.status);  
+    //                // data = result.data;
+    //                data = result.data
+    //                alert("Registro guardado");
+    //             } 
+    //         }
+    //     });
+    // }
+    // //
+
+   // -------------->
+   updateAgencias=function(){
+       alert("inicio de funcion");
         var IdAgencia = $("#IdAgencia").val();
-        var Nombre = $("#Nombre1").val();
+        var NombreAgencia = $("#NombreAgencia").val();
         var Activo = $("#Activo").val();
-        $.ajax({
-                method: "POST",
-                url: "controller/AgenciasController.php",            
-                data: { 
-                    action: "update",                         
-                    Nombre: Nombre,
-                    activo: activo                                                                                
-                },
-                dataType: "json"
-        })
-        .done(function(result) {
+
+         $.ajax({
+           
+                 method: "POST",
+                 url: "controller/AgenciasController.php",             
+                 data: { 
+                     action: "update",                         
+                     IdAgencia: IdAgencia,
+                     NombreAgencia: NombreAgencia,   
+                     Activo: "S"
+                                                                                           
+                 },
+                 dataType: "json"
+         })
+         .done(function( result ) {
+          //  alert("entra antes del if 1");
             if( result != "" ){   
-              //  alert("primer if");            
+                alert("entra despues del done");  
+             //   console.log(result);          
                 if(result.status === "ok"){
-                //   alert("sgundo if");
-                 // console.log(result.status);  
-                   // data = result.data;
-                   data = result.data
-                   alert("Registro guardado");
-                } 
+                    alert("entra if 2");
+                //  console.log(result);
+                    data = result.data;
+                  //  $("#IdAgencia").val(data[0].IdAgencia);                                 
+                  //  var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+                //    var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Guardar</button>';                                    
+                    
+                //    var html = "";
+               ///     html += btnCerrar + btnGuardar;                   
+                //    $("#divBtnModal").html(html);
+                    alert("Registro guardado");
+                }
             }
         });
     }
-    
+
+
+
+//    updateAgencias = function(){
+//         var IdAgencia = $("#IdAgencia").val();
+//         var Nombre = $("#Nombre1").val();
+//         var Activo = $("#Activo").val();
+//         $.ajax({
+//                 method: "POST",
+//                 url: "controller/AgenciasController.php",            
+//                 data: { 
+//                     action: "update",                         
+//                     IdAgencia: IdAgencia,
+//                     Nombre: Nombre1,   
+//                     Activo: "S"
+                                                                                           
+//                 },
+//                 dataType: "json"
+//         })
+//         .done(function(result) {
+//          //   if( result != "" ){   
+//                 alert("primer if");            
+//               //  if(result.status === "ok"){
+//               //    alert("segundo if");
+//                  // console.log(result.status);  
+//                    // data = result.data;
+//                 //   data = result.data
+//                 //   $("#IdAgencia").val(data[0].IdAgencia); 
+//                 //    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+//                 //     var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Actualizar</button>';                                
+//                 //     var html = "";
+//                 //     html += btnCerrar + btnGuardar;                   
+
+//                 //     $("#divBtnModal").html(html);
+//                //     alert("Registro modificado correctamente");
+//                // } 
+//            // }
+//         });
+//     }
 //------------->
 loadInfoAgencias = function(IdAgencia){
         $.ajax({
@@ -264,11 +344,21 @@ loadInfoAgencias = function(IdAgencia){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#Nombre1").val(data[0].Nombre);
+                   $("#NombreAgencia").val(data[0].NombreAgencia);
                    $("#Activo").val(data[0].Activo);
 
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Actualizar</button>';                               
+                   
+                    // var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar= '';
+                      
+                    if($("#IdAgencia").val() != ""){
+                        btnGuardar = '<button type="button" onclick="saveAgencias()" class="btn btn-primary">Guardar</button>';  
+                    } else {
+                        btnGuardar = '<button type="button" onclick="saveAgencias()" class="btn btn-primary">Actualizar</button>';  
+                    }
+                   
+                   
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
@@ -306,7 +396,7 @@ loadInfoAgencias = function(IdAgencia){
 
 deleteAgencias = function(IdAgencia){
         var IdAgencia = $("#IdAgencia").val();
-        var Nombre = $("#Nombre1").val();
+        var Nombre = $("#Nombre").val();
         var Activo = $("#Activo").val();
         $.ajax({
                 method: "POST",
@@ -316,19 +406,20 @@ deleteAgencias = function(IdAgencia){
                     IdAgencia: IdAgencia                                                                                
                 },
                 dataType: "json"
+
+
         })
-        .done(function(result) {
-            if( result != "" ){   
-              //  alert("primer if");            
-                if(result.status === "ok"){
-                //   alert("sgundo if");
-                 // console.log(result.status);  
-                   // data = result.data;
-                   data = result.data
-                   alert("Registro guardado");
-                } 
-            }
-        });
+        // .done(function( result ) {
+        //     if( result != "" ){               
+        //         if(result.status === "ok"){
+        //             data = result.data;
+        //            $("#Nombre1").val(data[0].Nombre);
+        //            $("#Activo").val(data[0].Activo);
+        //            data = result.data
+        //            alert("Registro eliminado");
+        //         } 
+        //     }
+        // });
     }
     
 
@@ -375,3 +466,10 @@ deleteAgencias = function(IdAgencia){
 
 
 </script>
+<!-- <script>
+    $(document).ready( function () {
+    $('#tblAgencias').DataTable();
+} );
+
+</script> -->
+
