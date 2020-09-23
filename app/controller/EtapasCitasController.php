@@ -28,13 +28,13 @@ switch($action){
     break;
     
     case "update":
-        $dataArray = buildArrayUpdate($_POST, "idEtapaCitas");
-        $idValuesArray = ["idField" => "idEtapaCitas", "idValue" => $idEtapaCitas];
+        $dataArray = buildArrayUpdate($_POST, "idEtapaCita");
+        $idValuesArray = ["idField" => "idEtapaCita", "idValue" => $idEtapaCita];
         echo $EtapasCitasModel->updateEtapasCitas($dataArray, $idValuesArray);
     break;
     
     case "delete":
-        $idValuesArray = ["idField" => "idEtapaCitas", "idValue" => $idEtapaCitas];
+        $idValuesArray = ["idField" => "idEtapaCita", "idValue" => $idEtapaCita];
         echo $EtapasCitasModel->deleteEtapasCitas($idValuesArray);
     break;
 
