@@ -189,7 +189,7 @@ searchFuentesLead = function(){
 // ------------------------------>
 
     saveFuenteLead = function(){
-        var nombreFuente = $("#nombreFuente1").val(); 
+        var nombreFuente = $("#nombreFuente").val(); 
 
         $.ajax({
                 method: "POST",
@@ -225,7 +225,7 @@ loadInfoFuenteLead = function(idFuenteLead){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreFuente1").val(data[0].nombreFuente);
+                   $("#nombreFuente").val(data[0].nombreFuente);
                    $("#activo").val(data[0].activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
                     var btnGuardar = '<button type="button" onclick="saveFuenteLead()" class="btn btn-primary">Actualizar</button>';                               
@@ -236,11 +236,61 @@ loadInfoFuenteLead = function(idFuenteLead){
             }
         });
     }
-// ------------------------>
+// -------------------------->
+updateFuenteLead = function(){
+        var idFuenteLead = $("#idFuenteLead").val();
+        var nombreFuente = $("#nombreFuente").val();
+        var activo = $("#activo").val();
 
-eliminar = function(){
+        $.ajax({
+                method: "POST",
+                url: "controller/FuenteLeadController.php",            
+                data: { 
+                    action: "update",
+                    idFuenteLead : idFuenteLead,
+                    nombreFuente : nombreFuente,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
 
-}    
+   // --------------->
+deleteFuenteLead = function(){
+       var idFuenteLead = $("#idFuenteLead").val();
+        var  nombreFuente = $("#nombreFuente").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/FuenteLeadController.php",            
+                data: { 
+                    action: "delete",
+                    idFuenteLead : idFuenteLead,
+                    nombreFuente : nombreFuente,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+     
+/// ------------------------->
 
 // -------------------------->
 

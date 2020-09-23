@@ -9,10 +9,10 @@
         <hr class="my-4">
         <form id= "guiones">
             <!-- <input type="hidden" class="form-control" id="idPlantillaGuion" > -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombrePlantillaGuion">Nombre de Plantilla - Guión</label>
                 <input type="text" class="form-control" id="nombrePlantillaGuion" >
-            </div>
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
@@ -23,10 +23,10 @@
             </div>
             -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
-                <button class="btn btn-primary btn-group-lg"  type="reset" >Limpiar</button> 
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
+                <button class="btn btn-primary btn-group-lg"  type="reset" >Limpiar</button>  -->
                 
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar</button>        
+                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar Registro</button>        
             </div>
         </form>
     </div>
@@ -49,8 +49,8 @@
                 <input type="hidden" value="" id="idPlantillasGuion">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombrePlantillaGuion1" class="form-control-label">Nombre</label>
-                        <input class="form-control" type="text" value="" id="nombrePlantillaGuion1">
+                        <label for="nombrePlantillaGuion" class="form-control-label">Nombre</label>
+                        <input class="form-control" type="text" value="" id="nombrePlantillaGuion">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="descripcion" class="form-control-label">Descripción</label>
@@ -96,7 +96,7 @@
       </div>
       <div class="modal-body">
         <form id="frmAgenciasModal">  
-       
+        <input type="hidden" value="" id="idPlantillasGuion1">
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
@@ -211,7 +211,7 @@ searchGuiones = function(){
 // ----------------->
 
     saveGuiones = function(){
-        var nombrePlantillaGuion = $("#nombrePlantillaGuion1").val(); 
+        var nombrePlantillaGuion = $("#nombrePlantillaGuion").val(); 
 
         $.ajax({
                 method: "POST",
@@ -247,7 +247,7 @@ loadInfoGuiones = function(idPlantillaGuion){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombrePlantillaGuion1").val(data[0].nombrePlantillaGuion);
+                   $("#nombrePlantillaGuion").val(data[0].nombrePlantillaGuion);
                    $("#descripcion").val(data[0].descripcion);
                    $("#orden").val(data[0].orden);
                    $("#activo").val(data[0].activo);
@@ -260,11 +260,71 @@ loadInfoGuiones = function(idPlantillaGuion){
             }
         });
     }
-// -------------------->
+// -------------------------->
+updateGuiones = function(){
+        var idPlantillaGuion = $("#idPlantillaGuion").val();
+        var  nombrePlantillaGuion = $("#nombrePlantillaGuion").val();
+        var  descripcion = $("#descripcion").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
 
-eliminar = function(){
 
-}    
+        $.ajax({
+                method: "POST",
+                url: "controller/GuionesController.php",            
+                data: { 
+                    action: "update",
+                    idPlantillaGuion: idPlantillaGuion,
+                    nombrePlantillaGuion : nombrePlantillaGuion,
+                    descripcion: descripcion,
+                     orden: orden,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
+
+   // --------------->
+deleteGuiones = function(){
+        var idPlantillaGuion = $("#idPlantillaGuion").val();
+        var  nombrePlantillaGuion = $("#nombrePlantillaGuion").val();
+        var  descripcion= $("#descripcion").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/GuionesController.php",            
+                data: { 
+                    action: "delete",
+                    idPlantillaGuion: idPlantillaGuion,
+                    nombrePlantillaGuion : nombrePlantillaGuion,
+                    descripcion: descripcion,
+                     orden: orden,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+     
+/// ------------------------->
 // ------------------------->
 
 $(document).ready(function () {

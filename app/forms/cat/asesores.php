@@ -9,10 +9,10 @@
         <hr class="my-4">
         <form>
             <!-- <input type="hidden" class="form-control" id="idAsesor"> -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombre">Nombre del Asesor</label>
                 <input type="text" class="form-control" id="nombre">
-            </div>
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="apellidoPaterno">Apellido Paterno</label>
@@ -32,8 +32,8 @@
 
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-dark btn-group-lg">Buscar</button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>     
+                <!-- <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-dark btn-group-lg">Buscar</button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>      -->
                 <button type="button" value="Guardar" id="btnGuardar"  data-toggle="modal" data-target="#modalFrmAsesores" class="btn btn-dark btn-group-lg">Agregar</button>
                    
             </div>
@@ -126,8 +126,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="frmAgenciasModal">  
-       
+        <form id="frmAsesoresModal">  
+        <input type="hidden" value="" id="idAsesor1">
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
@@ -243,41 +243,40 @@
     }
 
 // -------------------->
-/* searchAsesores2 = function(){
-        var nombreCompleto = $("#nombreCompleto").val();
-        var nombre = $("#nombre1").val();
-        var apellidoPaterno = $("#apellidoPaterno").val();  
-        var apellidoMaterno = $("#apellidoMaterno").val(); 
-        var idTipoAsesor = $("#idTipoAsesor").val();
-            $.ajax({
-            method: "POST",
-            url: "controller/AsesorController.php",            
-            data: { 
-                action: "consultaTipoAsesor", 
-                nombre: nombre,
-                tipoAsesor: idTipoAsesor
-              //  apellidoPaterno: apellidoPaterno,
-               // apellidoMaterno: apellidoMaterno
+updateAsesores = function(){
+        var idAsesor = $("#idAsesor").val();
+        var nombre = $("#nombre").val();
+        var apellidoMaterno = $("#apellidoMaterno").val();
+        var apellidoPaterno = $("#apellidoPaterno").val();
+        var Activo = $("#Activo")).val();
+        var tipoAsesor = $("#idTipoAsesor").val();
+        var Agencias_idAgencias = $("#IdAgencia").val();
 
-            },
-            dataType: "json"
+        $.ajax({
+                method: "POST",
+                url: "controller/AseoresController.php",            
+                data: { 
+                    action: "update",
+                    idAsesor : idAsesor,                           
+                    nombre: nombre, 
+                    apellidoMaterno: apellidoMaterno,  
+                    apellidoPaterno : apellidoPaterno ,                                                  
+                    Activo: "S",
+                    tipoAsesor: tipoAsesor,
+                    Agencias_idAgencias: Agencias_idAgencias
+
+                },
+                dataType: "json"
         })
-        .done(function(result) {
+        .done(function( result ) {
             if( result != "" ){               
-                if(result.status === "ok"){     
-                    
-                    var html = buildGridAsesores(result.data, result.total);
-                    $("#divDataTableAsesores").html(html);
-                    $('#tblAsesores').DataTable();                                                   
-                }else{
-                    $("#divDataTableAsesores").html("Sin Resultados");
-                 }
-                }else{
-                $("#divDataTableAsesores").html("Recargar la página");
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
             }
         });
-    } */
-
+    }
 // -------------------->
 loadAsesores = function(idDiv, idCampo){
         $.ajax({
@@ -303,28 +302,28 @@ loadAsesores = function(idDiv, idCampo){
     };
 
 // ------------>
-loadAgencia = function(idDiv, idCampo){
-        $.ajax({
-            method: "POST",
-            url: "controller/AgenciasController.php",            
-            data: { action: "selectCombo"},
-            dataType: "json"
-        })
-        .done(function( result ) {
-            if( result != "" ){               
-                if(result.status === "ok"){                     
-                    var html = "";
-                    html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
-                    html += "<option value=''>Seleccione Agencia</option>";
-                    $.each(result.data, function (key, val) {
-                        html += "<option value='" + val.IdAgencia  + "'>" + val.Nombre + "</option>";
-                    });
-                    html += "</select>";
-                    $("#"+idDiv).html(html);                         
-                }
-            }
-        });
-    }
+// loadAgencia = function(idDiv, idCampo){
+//         $.ajax({
+//             method: "POST",
+//             url: "controller/AgenciasController.php",            
+//             data: { action: "selectCombo"},
+//             dataType: "json"
+//         })
+//         .done(function( result ) {
+//             if( result != "" ){               
+//                 if(result.status === "ok"){                     
+//                     var html = "";
+//                     html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
+//                     html += "<option value=''>Seleccione Agencia</option>";
+//                     $.each(result.data, function (key, val) {
+//                         html += "<option value='" + val.IdAgencia  + "'>" + val.Nombre + "</option>";
+//                     });
+//                     html += "</select>";
+//                     $("#"+idDiv).html(html);                         
+//                 }
+//             }
+//         });
+//     }
 
 
 // ---------------->
@@ -378,7 +377,7 @@ loadInfoAsesores = function(idAsesor){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                //   $("#nombreCompleto").val(data[0].nombreCompleto);
+                  $("#idAsesor").val(data[0].idAsesor);
                    $("#nombre1").val(data[0].nombre);
                    $("#apellidoMaterno1").val(data[0].apellidoMaterno);
                    $("#apellidoPaterno1").val(data[0].apellidoPaterno);
@@ -388,7 +387,7 @@ loadInfoAsesores = function(idAsesor){
                    
                     
                    var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="saveAsesores()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="updateAsesores()" class="btn btn-primary">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
@@ -400,9 +399,34 @@ loadInfoAsesores = function(idAsesor){
 // -------------->
 
 
-    eliminar = function(){
+deleteAgencias = function(){
+        var idAsesor = $("#idAsesor").val();
+        var nombre = $("#nombre").val();
+        var apellidoMaterno = $("#apellidoMaterno").val();
+        var apellidoPaterno = $("#apellidoPaterno").val();
+        var Activo = $("#Activo")).val();
+        var tipoAsesor = $("#idTipoAsesor").val();
+        var Agencias_idAgencias = $("#IdAgencia").val();
+        $.ajax({
+                method: "POST",
+                url: "controller/AgenciasController.php",            
+                data: { 
+                    idAsesor : idAsesor,                                                                             
+                    Activo: "N"                           
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
 
-    }   
+ 
 //   ------------>
     $(document).ready(function () {
             getAsesores();

@@ -9,10 +9,11 @@
         <hr class="my-4">
         <form>
             <!-- <input type="hidden" class="form-control" id="idEtapaLead" > -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapa">
-            </div>
+            </div> -->
+
             <!--
             <div class="form-group">
                 <label for="descripcionEtapa">Descripcion</label>
@@ -32,8 +33,8 @@
             </div>
             -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasLead">Agregar</button>
                             
             </div>
@@ -56,11 +57,11 @@
         </div>
         <div class="modal-body">
             <form id="frmEtapasLeadModal">
-                <input type="hidden" value="" id="idEtapaLead">
+                <input type="text" value="" id="idEtapaLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreEtapa1" class="form-control-label">Nombre de Etapa</label>
-                        <input class="form-control" type="text" value="" id="nombreEtapa1" required >
+                        <label for="nombreEtapa" class="form-control-label">Nombre de Etapa</label>
+                        <input class="form-control" type="text" value="" id="nombreEtapa" required >
                     </div>
                     <div class="col-lg-6 col-md-6">
                     <label for="descripcionEtapa" class="form-control-label">Descripción</label>
@@ -106,7 +107,7 @@
       </div>
       <div class="modal-body">
         <form id="frmAgenciasModal">  
-       
+        <input type="hidden" value="" id="idEtapaLead1">
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
@@ -274,7 +275,7 @@ loadInfoEtapasLead = function(idEtapaLead){
                    $("#activo").val(data[0].activo);
                  
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="saveEtapasLead()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="updateEtapasLead()" class="btn btn-primary">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
@@ -284,9 +285,67 @@ loadInfoEtapasLead = function(idEtapaLead){
     }
 
 // -------------------------->
-    eliminar = function(){
+updateEtapasLead = function(){
+        var idEtapaLead = $("#idEtapaLead").val();
+        var  nombreEtapa = $("#nombreEtapa").val();
+        var  descripcionEtapa = $("#descripcionEtapa").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasLeadController.php",            
+                data: { 
+                    action: "update",
+                    idEtapaLead: idEtapaLead,
+                    nombreEtapa : nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
 
-    }   
+   // --------------->
+deleteEtapasLead = function(){
+    var idEtapaLead = $("#idEtapaLead1").val();
+        var  nombreEtapa = $("#nombreEtapa").val();
+        var  descripcionEtapa = $("#descripcionEtapa").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasLeadController.php",            
+                data: { 
+                    action: "delete",
+                    idEtapaLead: idEtapaLead,
+                    nombreEtapa : nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+   
 // --------------------------->
     $(document).ready(function () {
             getEtapasLead();

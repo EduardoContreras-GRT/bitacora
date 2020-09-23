@@ -224,7 +224,7 @@ loadInfoFormaCompra = function(idMetodoCompra){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreMetodoCompra1").val(data[0].nombreMetodoCompra);
+                   $("#nombreMetodoCompra").val(data[0].nombreMetodoCompra);
                    $("#activo").val(data[0].activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
                     var btnGuardar = '<button type="button" onclick="saveFormaCompra()" class="btn btn-primary">Actualizar</button>';                               
@@ -235,10 +235,61 @@ loadInfoFormaCompra = function(idMetodoCompra){
             }
         });
     }
-// ----------------------->
-    eliminar = function(){
+// -------------------------->
+updateFormaCompra = function(){
+        var idMetodoCompra = $("#idMetodoCompra").val();
+        var  nombreMetodoCompra = $("nombreMetodoCompra").val();
+        var  activo = $("#activo").val();
 
-    }   
+        $.ajax({
+                method: "POST",
+                url: "controller/FormaComprasController.php",            
+                data: { 
+                    action: "update",
+                    idMetodoCompra: idMetodoCompra,
+                    nombreMetodoCompra : nombreMetodoCompra,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
+
+   // --------------->
+deleteFormaCompra = function(){
+        var idMetodoCompra = $("#idMetodoCompra").val();
+        var  nombreMetodoCompra = $("nombreMetodoCompra").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/FormaComprasController.php",            
+                data: { 
+                    action: "delete",
+                    idMetodoCompra: idMetodoCompra,
+                    nombreMetodoCompra : nombreMetodoCompra,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+     
+/// -------------------------> 
     
 // ----------------------->
     $(document).ready(function () {

@@ -226,7 +226,7 @@ loadInfoEtapasSeguimiento = function(idEtapaSeguimiento){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreEtapaSeguimiento1").val(data[0].nombreEtapaSeguimiento);
+                   $("#nombreEtapaSeguimiento").val(data[0].nombreEtapaSeguimiento);
                    $("#activo").val(data[0].Activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
                     var btnGuardar = '<button type="button" onclick="saveEtapasSeguimiento()" class="btn btn-primary">Actualizar</button>';                               
@@ -237,11 +237,62 @@ loadInfoEtapasSeguimiento = function(idEtapaSeguimiento){
             }
         });
     }
+
 // -------------------------->
+updateEtapasSeguimiento = function(){
+        var idEtapaSeguimiento = $("#idEtapaSeguimiento").val();
+        var  nombreEtapaSeguimiento = $("#nombreEtapaSeguimiento").val();
+        var  activo = $("#activo").val();
+    
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasSeguimientoController.php",            
+                data: { 
+                    action: "update",
+                    idEtapaSeguimiento:idEtapaSeguimiento,
+                    nombreEtapaSeguimiento : nombreEtapaSeguimiento,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
 
-    eliminar = function(){
-
-    }    
+   // --------------->
+deleteEtapasSeguimiento = function(){
+        var idEtapaSeguimiento = $("#idEtapaSeguimiento").val();
+        var  nombreEtapaSeguimiento = $("#nombreEtapaSeguimiento").val();
+        var  activo = $("#activo").val();
+    
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasSeguimientoController.php",            
+                data: { 
+                    action: "delete",
+                    idEtapaSeguimiento:idEtapaSeguimiento,
+                    nombreEtapaSeguimiento : nombreEtapaSeguimiento,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+     
 /// ------------------------->
     $(document).ready(function () {
             getEtapasSeguimiento();

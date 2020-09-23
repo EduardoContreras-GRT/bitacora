@@ -9,10 +9,10 @@
         <hr class="my-4">
         <form>
             <!-- <input type="hidden" class="form-control" id="idEtapaCita" > -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapa" >
-            </div>
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="descripcionEtapa">Descripción</label>
@@ -32,8 +32,8 @@
             </div>
 -->
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar </button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
+                <!-- <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar </button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button>
                        
             </div>
@@ -56,8 +56,8 @@
           </button>
         </div>
         <div class="modal-body">
-            <form id="frmEtapasCitasModal">
-                <input type="hidden" value="" id="idEtapaCita">
+            <form id="frmEtapasCitas">
+                <input type="text" value="" id="idEtapaCita">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombreEtapa1" class="form-control-label">Nombre de Etapa</label>
@@ -107,8 +107,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="frmAgenciasModal">  
-       
+      <form id="frmEtapasCitas">
+                <input type="hidden" value="" id="idEtapaCita1">
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
@@ -254,6 +254,39 @@ saveEtapasCitas = function(){
     }
     
 // --------------------------->
+updateEtapasCitas = function(){
+        var idEtapaCita = $("#idEtapaCita").val();
+        var  nombreEtapa = $("#nombreEtapa").val();
+        var  descripcionEtapa = $("#descripcionEtapa").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
+
+
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasCitasController.php",            
+                data: { 
+                    action: "update",
+                    idEtapaCita: idEtapaCita,
+                    nombreEtapa : nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
+
+// ---------------------------->
 
 loadInfoEtapasCitas = function(idEtapaCita){
         $.ajax({
@@ -275,7 +308,7 @@ loadInfoEtapasCitas = function(idEtapaCita){
                    $("#activo").val(data[0].activo);
                  
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="saveEtapasCitas()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="updateEtapasCitas()" class="btn btn-primary">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
@@ -285,8 +318,37 @@ loadInfoEtapasCitas = function(idEtapaCita){
     }
 
 // --------------->
-    eliminar = function(){
-    }  
+deleteEtapasCitas = function(){
+    var idEtapaCita = $("#idEtapaCita1").val();
+        var  nombreEtapa = $("#nombreEtapa").val();
+        var  descripcionEtapa = $("#descripcionEtapa").val();
+        var  orden = $("#orden").val();
+        var  activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/EtapasCitasController.php",            
+                data: { 
+                    action: "delete",
+                    idEtapaCita: idEtapaCita,
+                    nombreEtapa : nombreEtapa,
+                     descripcionEtapa: descripcionEtapa,
+                     orden: orden,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+
+
 // --------------->
     $(document).ready(function (){
             getEtapasCitas();

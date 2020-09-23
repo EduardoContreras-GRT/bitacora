@@ -229,7 +229,7 @@ loadInfoTemperatura = function(idTemperaturaLead){
                    $("#nombreTemperatura1").val(data[0].nombreTemperatura);
                    $("#activo").val(data[0].activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="saveTemperaturas()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="updateTemperatura()" class="btn btn-primary">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);
@@ -237,10 +237,63 @@ loadInfoTemperatura = function(idTemperaturaLead){
             }
         });
     }
-// -------------------------------->
+// -------------------------->
+updateTemperatura = function(){
+        var idTemperaturaLead = $("#idTemperaturaLead").val();
+        var  nombreTemperatura = $("##nombreTemperatura1").val();
+        var  activo = $("#activo").val();
+       
 
-eliminar = function(){
-}    
+
+        $.ajax({
+                method: "POST",
+                url: "controller/TemperaturaController.php",            
+                data: { 
+                    action: "update",
+                    idTemperaturaLead: idTemperaturaLead,
+                    nombreTemperatura : nombreTemperatura,
+                    activo: "S"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro modificado");  
+                }
+            }
+        });
+    }
+
+   // --------------->
+deleteTemperatura = function(){
+        var idTemperaturaLead = $("#idTemperaturaLead").val();
+        var nombreTemperatura = $("#nombreTemperatura1").val();
+        var activo = $("#activo").val();
+       
+        $.ajax({
+                method: "POST",
+                url: "controller/TemperaturaController.php",            
+                data: { 
+                    action: "delete",
+                    idTemperaturaLead: idTemperaturaLead,
+                    nombreTemperatura : nombreTemperatura,
+                    activo: "N"                            
+                },
+                dataType: "json"
+        })
+        .done(function( result ) {
+            if( result != "" ){               
+                if(result.status === "ok"){
+                    data = result.data;
+                    alert("Registro eliminado");  
+                }
+            }
+        });
+    }
+     
+/// ------------------------->
 
 // --------------------------------->
 
