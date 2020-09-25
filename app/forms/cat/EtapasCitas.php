@@ -1,13 +1,25 @@
 <?php
 //Aqui validar session
 ?>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="row">
+
+
+
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Etapas de Cita</h2>
         <p class="lead">Etapas de las Citas</p>
         <hr class="my-4">
         <form>
+                 
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmEtapasCitas" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+    </div>
+
             <!-- <input type="hidden" class="form-control" id="idEtapaCita" > -->
             <!-- <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
@@ -31,12 +43,16 @@
                 </select>
             </div>
 -->
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                 <!-- <button type="button" value="Buscar" id="btnBuscar" onclick="searchEtapasCitas()" class="btn btn-dark btn-group-lg">Buscar </button>
                 <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button>
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar Registro Nuevo</button>
                        
-            </div>
+            </div> -->
+
+            
+
+
         </form>
     </div>
 
@@ -44,6 +60,8 @@
 
 </div>
 </div>
+
+
 
 <!--  MODAL FORM  EDITAR-->
 <div class="modal fade" id="modalFrmEtapasCitas" tabindex="-1" role="dialog" aria-labelledby="modalFrmEtapasCitas" aria-hidden="true">
@@ -57,11 +75,11 @@
         </div>
         <div class="modal-body">
             <form id="frmEtapasCitas">
-                <input type="text" value="" id="idEtapaCita">
+              <input type="hidden" value="" id="idEtapaCita">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreEtapa1" class="form-control-label">Nombre de Etapa</label>
-                        <input class="form-control" type="text" value="" id="nombreEtapa1">
+                        <label for="nombreEtapa" class="form-control-label">Nombre de Etapa</label>
+                        <input class="form-control" type="text" value="" id="nombreEtapa">
                     </div>
                     <div class="col-lg-6 col-md-6">
                     <label for="descripcionEtapa" class="form-control-label">Descripción</label>
@@ -88,7 +106,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary"  value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary"  value="Guardar" id="btnGuardar" onclick="saveEtapasCitas()" data-dismiss="modal">Guardar Cambios</button>
         </div>
       </div>
     </div>
@@ -114,7 +132,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Eliminar Registro</button>
+        <button type="button" value="Borrar" id="btnBorrar" onclick="deleteEtapasCitas()" class="btn btn-primary" data-dismiss="modal">Eliminar Registro</button>
       </div>
     </div>
   </div>
@@ -144,6 +162,7 @@
         }); 
     }
 
+    
 // ------------------------->
     buildGridEtapas = function (data, total){
         var html = "<table id='tblEtapasCitas' class='table table table-hover'>";                 
@@ -227,7 +246,7 @@
 // ---------------------------------->
 
 saveEtapasCitas = function(){
-        var nombreEtapa= $("#nombreEtapa1").val()
+        var nombreEtapa= $("#nombreEtapa").val()
         var descripcionEtapa = $("#descripcionEtapa").val();
         var orden = $("#orden").val(); 
         var activo = $("#activo").val(); 
@@ -239,7 +258,7 @@ saveEtapasCitas = function(){
                      nombreEtapa : nombreEtapa,
                      descripcionEtapa: descripcionEtapa,
                      orden: orden,
-                    // activo: activo                                                                                
+                     Activo: "S"                                                                                 
                 },
                 dataType: "json"
         })
@@ -256,22 +275,20 @@ saveEtapasCitas = function(){
 // --------------------------->
 updateEtapasCitas = function(){
         var idEtapaCita = $("#idEtapaCita").val();
-        var  nombreEtapa = $("#nombreEtapa").val();
-        var  descripcionEtapa = $("#descripcionEtapa").val();
-        var  orden = $("#orden").val();
-        var  activo = $("#activo").val();
+        var nombreEtapa = $("#nombreEtapa").val();
+        var descripcionEtapa = $("#descripcionEtapa").val();
+        var orden = $("#orden").val();
+      //  var activo = $("#activo").val();
        
-
-
         $.ajax({
                 method: "POST",
                 url: "controller/EtapasCitasController.php",            
                 data: { 
                     action: "update",
                     idEtapaCita: idEtapaCita,
-                    nombreEtapa : nombreEtapa,
-                     descripcionEtapa: descripcionEtapa,
-                     orden: orden,
+                    nombreEtapa: nombreEtapa,
+                    descripcionEtapa: descripcionEtapa,
+                    orden: orden,
                     activo: "S"                            
                 },
                 dataType: "json"
@@ -302,13 +319,14 @@ loadInfoEtapasCitas = function(idEtapaCita){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreEtapa1").val(data[0].nombreEtapa);
+                  $("#idEtapaCita").val(data[0].idEtapaCita);
+                   $("#nombreEtapa").val(data[0].nombreEtapa);
                    $("#descripcionEtapa").val(data[0].descripcionEtapa);
                    $("#orden").val(data[0].orden);
                    $("#activo").val(data[0].activo);
                  
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="updateEtapasCitas()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="updateEtapasCitas()" class="btn btn-primary" data-dismiss="modal">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);

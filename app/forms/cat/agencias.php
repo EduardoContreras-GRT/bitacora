@@ -1,13 +1,20 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h1 class="display-4">Agencias</h1>
         <p class="lead">Este es el catálogo de agencias</p>
         <hr class="my-4">
         <form id="frmAgencias">
+
+        <div class="list-group " id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmAgencias" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+            </div>
            <!-- <input type="hidden" class="form-control" id="IdAgencia"> -->
             <!-- <div class="form-group">
                 <label for="NombreAgencia1">Nombre de Agencia</label>
@@ -22,13 +29,13 @@
                 </select>
             </div>
             -->
-            <div class="btn-group" role="group" aria-label="Basic example">  
+            <!-- <div class="btn-group" role="group" aria-label="Basic example">   -->
                 <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchAgencia()">Buscar</button>
                 <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
-                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmAgencias">Agregar Agencia Nueva</button>      
+                 <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmAgencias">Agregar Agencia Nueva</button>       -->
               <!--  <button type="button" class="btn btn-dark btn-group-lg"  value="Guardar" id="btnGuardar" onclick="saveAgencias()">Guardar</button> -->
               <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasCitas">Agregar</button> -->
-            </div>
+           
         </form>
     </div>
     <div class="col-lg-8" id="divDataTableAgencias">
@@ -49,7 +56,7 @@
         </div>
         <div class="modal-body">
             <form id="frmAgenciasModal">
-                <input type="text" value="" id="IdAgencia">
+              <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                     <label for="NombreAgencia">Nombre de Agencia</label>
@@ -97,7 +104,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary"value="Borrar" id="btnBorrar" onclick="deleteAgencias()" data-dismiss="modal">Eliminar Registro</button>
+        <button type="button" class="btn btn-primary" value="Borrar" id="btnBorrar" onclick="deleteAgencias()" data-dismiss="modal">Eliminar Registro</button>
       </div>
     </div>
   </div>
@@ -282,7 +289,7 @@ loadInfoAgencias = function(IdAgencia){
 
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
 
-                    var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary">Actualizar</button>';  
+                    var btnGuardar = '<button type="button" onclick="updateAgencias()" class="btn btn-primary"  data-dismiss="modal">Actualizar</button>';  
                                               
                     //  var btnGuardar= '';
                   //    

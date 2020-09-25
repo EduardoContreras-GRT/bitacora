@@ -21,7 +21,7 @@ switch($action){
        ]; 
       //  echo $AgenciasModel->insertAgencias($dataArray); 
       //echo $Nombre;
-     // var_dump($_POST);sssss
+     // var_dump($_POST);
   
         // $dataArray = buildArray($_POST);      
          echo $AgenciasModel->insertAgencias($dataArray);        

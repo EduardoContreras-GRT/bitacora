@@ -1,13 +1,20 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h1 class="display-4">Asesores</h1>
         <p class="lead">Este es el catálogo de asesores</p>
         <hr class="my-4">
         <form>
+
+            <div class="list-group " id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmAsesores" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+            </div>
             <!-- <input type="hidden" class="form-control" id="idAsesor"> -->
             <!-- <div class="form-group">
                 <label for="nombre">Nombre del Asesor</label>
@@ -31,16 +38,14 @@
             </div>
 
 -->
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                 <!-- <button type="button" value="Buscar" id="btnBuscar" onclick="searchAsesores()" class="btn btn-dark btn-group-lg">Buscar</button>
                 <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>      -->
-                <button type="button" value="Guardar" id="btnGuardar"  data-toggle="modal" data-target="#modalFrmAsesores" class="btn btn-dark btn-group-lg">Agregar</button>
-                   
-            </div>
-        </form>
-    </div>
+                <!-- <button type="button" value="Guardar" id="btnGuardar"  data-toggle="modal" data-target="C" class="btn btn-dark btn-group-lg"  data-dismiss="modal">Agregar</button> -->
+                <!-- </div> -->
+            </form>
+         </div>
     <div class="col-lg-8" id="divDataTableAsesores">
-
     </div>
 </div>
 
@@ -56,23 +61,24 @@
         </div>
         <div class="modal-body">
             <form id="frmAsesoresModal">
-                <input type="hidden" value="" id="idAsesor">
+                <!-- <input type="hidden" value="" id="idAsesor"> -->
+                <input type="text" value="" id="idAsesor">
                 <!-- <input type="hidden" value="" id="nombreCompleto"> -->
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombre1" class="form-control-label">Nombre de Asesor</label>
-                        <input class="form-control" type="text" value="" id="nombre1">
+                        <label for="nombre" class="form-control-label">Nombre de Asesor</label>
+                        <input class="form-control" type="text" value="" id="nombre">
                     </div>
                     
                     <div class="col-lg-6 col-md-6">
-                    <label for="apellidoMaterno1" class="form-control-label">Apellido Materno</label>
-                        <input class="form-control" type="text" value="" id="apellidoMaterno1">
+                    <label for="apellidoMaterno" class="form-control-label">Apellido Materno</label>
+                        <input class="form-control" type="text" value="" id="apellidoMaterno">
                     </div>                         
                 </div>
                 <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <label for="apellidoPaterno1" class="form-control-label">Apellido Paterno</label>
-                    <input class="form-control" type="text" value="" id="apellidoPaterno1">
+                    <label for="apellidoPaterno" class="form-control-label">Apellido Paterno</label>
+                    <input class="form-control" type="text" value="" id="apellidoPaterno">
                 </div>                         
                 <div class="col-lg-6 col-md-6">
                     <label for="activo" class="form-control-label">Estatus</label>
@@ -128,12 +134,13 @@
       <div class="modal-body">
         <form id="frmAsesoresModal">  
         <input type="hidden" value="" id="idAsesor1">
+        
         <p> <i class="fas fa-exclamation-circle"></i>  El registro que has seleccionado se eliminará permanentemente</p>
         </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Eliminar Registro</button>
+        <button type="button" class="btn btn-primary"  value="Borrar" id="btnBorrar" onclick="deleteAsesores()"  data-dismiss="modal">Eliminar Registro</button>
       </div>
     </div>
   </div>
@@ -211,7 +218,7 @@
 // ----------------------->
     searchAsesores = function(){
         var nombreCompleto = $("#nombreCompleto").val();
-        var nombre = $("#nombre1").val();
+        var nombre = $("#nombre").val();
         var apellidoPaterno = $("#apellidoPaterno").val();  
         var apellidoMaterno = $("#apellidoMaterno").val(); 
         var tipoAsesor = $("#tipoAsesor").val();
@@ -248,7 +255,7 @@ updateAsesores = function(){
         var nombre = $("#nombre").val();
         var apellidoMaterno = $("#apellidoMaterno").val();
         var apellidoPaterno = $("#apellidoPaterno").val();
-        var Activo = $("#Activo")).val();
+        var Activo = $("#Activo").val();
         var tipoAsesor = $("#idTipoAsesor").val();
         var Agencias_idAgencias = $("#IdAgencia").val();
 
@@ -301,39 +308,39 @@ loadAsesores = function(idDiv, idCampo){
         });
     };
 
-// ------------>
-// loadAgencia = function(idDiv, idCampo){
-//         $.ajax({
-//             method: "POST",
-//             url: "controller/AgenciasController.php",            
-//             data: { action: "selectCombo"},
-//             dataType: "json"
-//         })
-//         .done(function( result ) {
-//             if( result != "" ){               
-//                 if(result.status === "ok"){                     
-//                     var html = "";
-//                     html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
-//                     html += "<option value=''>Seleccione Agencia</option>";
-//                     $.each(result.data, function (key, val) {
-//                         html += "<option value='" + val.IdAgencia  + "'>" + val.Nombre + "</option>";
-//                     });
-//                     html += "</select>";
-//                     $("#"+idDiv).html(html);                         
-//                 }
-//             }
-//         });
-//     }
+ //------------>
+ loadAgencia = function(idDiv, idCampo){
+         $.ajax({
+             method: "POST",
+             url: "controller/AgenciasController.php",            
+             data: { action: "selectCombo"},
+            dataType: "json"
+         })
+         .done(function( result ) {
+             if( result != "" ){               
+                 if(result.status === "ok"){                     
+                     var html = "";
+                     html = "<select id='" + idCampo + "' name='" + idCampo + "' class='form-control'>";
+                     html += "<option value=''>Seleccione Agencia</option>";
+                     $.each(result.data, function (key, val) {
+                        html += "<option value='" + val.IdAgencia  + "'>" + val.NombreAgencia + "</option>";
+                     });
+                    html += "</select>";
+                     $("#"+idDiv).html(html);                         
+                }
+             }
+       });
+     }
 
 
 // ---------------->
     saveAsesores = function(){
        // var idAsesor = $("idAsesor").val();
         var nombreCompleto = $("nombreCompleto1").val();
-        var nombre = $("#nombre1").val();
-        var apellidoPaterno = $("#apellidoPaterno1").val();
-        var apellidoMaterno = $("#apellidoMaterno1").val();
-        var Activo= $("#Activo1").val();
+        var nombre = $("#nombre").val();
+        var apellidoPaterno = $("#apellidoPaterno").val();
+        var apellidoMaterno = $("#apellidoMaterno").val();
+        var Activo= $("#Activo").val();
         var idTipoAsesor = $("#idTipoAsesor").val();
         var Agencias_idAgencias = $("#IdAgencia").val();
 
@@ -377,11 +384,11 @@ loadInfoAsesores = function(idAsesor){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                  $("#idAsesor").val(data[0].idAsesor);
-                   $("#nombre1").val(data[0].nombre);
-                   $("#apellidoMaterno1").val(data[0].apellidoMaterno);
-                   $("#apellidoPaterno1").val(data[0].apellidoPaterno);
-                   $("#Activo1").val(data[0].Activo);
+                   $("#idAsesor").val(data[0].idAsesor);
+                   $("#nombre").val(data[0].nombre);
+                   $("#apellidoMaterno").val(data[0].apellidoMaterno);
+                   $("#apellidoPaterno").val(data[0].apellidoPaterno);
+                   $("#Activo").val(data[0].Activo);
                    $("#idTipoAsesor").val(data[0].tipoAsesor);
                    $("#IdAgencia").val(data[0].Agencias_idAgencias);
                    
@@ -404,7 +411,7 @@ deleteAgencias = function(){
         var nombre = $("#nombre").val();
         var apellidoMaterno = $("#apellidoMaterno").val();
         var apellidoPaterno = $("#apellidoPaterno").val();
-        var Activo = $("#Activo")).val();
+        var Activo = $("#Activo").val();
         var tipoAsesor = $("#idTipoAsesor").val();
         var Agencias_idAgencias = $("#IdAgencia").val();
         $.ajax({

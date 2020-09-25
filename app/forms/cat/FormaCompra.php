@@ -1,18 +1,25 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Formas de Compra</h2>
         <p class="lead">Formas</p>
         <hr class="my-4">
         <form>
+            
+        <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmFormaCompra" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+    </div>
             <!-- <input type="hidden" class="form-control" id="idMetodoCompra" > -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombreMetodoCompra">Metodo de Compra</label>
-                <input type="text" class="form-control" id="nombreMetodoCompra" >
-            </div>
+                <input type="text" class="form-control" id="nombreMetodoCompra">
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
@@ -22,12 +29,12 @@
                 </select>
             </div>
 -->
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFormaCompra()">Buscar</button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmFormaCompra">Agregar</button>
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchFormaCompra()">Buscar</button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmFormaCompra">Agregar</button>
                             
-            </div>
+            </div> -->
         </form>
     </div>
     <div class="col-lg-8" id="divDataTableFormaCompra">
@@ -50,8 +57,8 @@
                 <input type="hidden" value="" id="IdAgencia">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreMetodoCompra1" class="form-control-label"> Metodo de Compra</label>
-                        <input class="form-control" type="text" value="" id="nombreMetodoCompra1">
+                        <label for="nombreMetodoCompra" class="form-control-label"> Metodo de Compra</label>
+                        <input class="form-control" type="text" value="" id="nombreMetodoCompra">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="Activo" class="form-control-label">Activo</label>
@@ -224,6 +231,7 @@ loadInfoFormaCompra = function(idMetodoCompra){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
+                    $("#idMetodoCompra").val(data[0].idMetodoCompra);
                    $("#nombreMetodoCompra").val(data[0].nombreMetodoCompra);
                    $("#activo").val(data[0].activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';

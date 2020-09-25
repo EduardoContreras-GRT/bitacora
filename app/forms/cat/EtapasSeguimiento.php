@@ -1,18 +1,24 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Etapas de Seguimiento</h2>
         <p class="lead">Etapas</p>
         <hr class="my-4">
         <form>
+        <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+    </div>
             <!-- <input type="hidden" class="form-control" id="idEtapaSeguimiento"> -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombreEtapaSeguimiento">Nombre de Etapa</label>
                 <input type="text" class="form-control" id="nombreEtapaSeguimiento">
-            </div>
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
@@ -22,12 +28,12 @@
                 </select>
             </div>
 -->
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasSeguimientos()">Buscar</button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento">Agregar</button>
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasSeguimientos()">Buscar</button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasSeguimiento">Agregar</button> -->
                          
-            </div>
+            <!-- </div> -->
         </form>
         </div>
     <div class="col-lg-8" id="divDataTableEtapasSeguimiento">
@@ -50,8 +56,8 @@
                 <input type="hidden" value="" id="idEtapaSeguimiento">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreEtapaSeguimiento1" class="form-control-label">Nombre de Etapa</label>
-                        <input type="text" class="form-control" id="nombreEtapaSeguimiento1">
+                        <label for="nombreEtapaSeguimiento" class="form-control-label">Nombre de Etapa</label>
+                        <input type="text" class="form-control" id="nombreEtapaSeguimiento">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label for="activo" class="form-control-label">Activo</label>
@@ -226,10 +232,11 @@ loadInfoEtapasSeguimiento = function(idEtapaSeguimiento){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
+                   $("#idEtapaSeguimiento").val(data[0].idEtapaSeguimiento);
                    $("#nombreEtapaSeguimiento").val(data[0].nombreEtapaSeguimiento);
                    $("#activo").val(data[0].Activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
-                    var btnGuardar = '<button type="button" onclick="saveEtapasSeguimiento()" class="btn btn-primary">Actualizar</button>';                               
+                    var btnGuardar = '<button type="button" onclick="saveEtapasSeguimiento()" class="btn btn-primary" data-dismiss="modal">Actualizar</button>';                               
                     var html = "";
                     html += btnCerrar + btnGuardar;  
                     $("#divBtnModal").html(html);

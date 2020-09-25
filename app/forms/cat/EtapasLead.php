@@ -1,13 +1,19 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Etapas de Lead</h2>
         <p class="lead">Etapas Lead</p>
         <hr class="my-4">
         <form>
+        <div class="list-group " id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmAgencias" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+            </div>
             <!-- <input type="hidden" class="form-control" id="idEtapaLead" > -->
             <!-- <div class="form-group">
                 <label for="nombreEtapa">Nombre de Etapa</label>
@@ -32,12 +38,12 @@
                 </select>
             </div>
             -->
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                 <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchEtapasLead()">Buscar</button>
                 <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasLead">Agregar</button>
-                            
-            </div>
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmEtapasLead" data-dismiss="modal">Agregar</button> -->
+            
+        <!-- </div> -->
         </form>
         </div>
         <div class="col-lg-8" id="divDataTableEtapasLead">
@@ -57,7 +63,7 @@
         </div>
         <div class="modal-body">
             <form id="frmEtapasLeadModal">
-                <input type="text" value="" id="idEtapaLead">
+                <input type="hidden" value="" id="idEtapaLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <label for="nombreEtapa" class="form-control-label">Nombre de Etapa</label>
@@ -86,7 +92,7 @@
         </div>
         <div id="divBtnModal" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasLead()">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" value="Guardar" id="btnGuardar" onclick="saveEtapasLead()" data-dismiss="modal">Guardar Cambios</button>
         
         </div>
       </div>
@@ -113,7 +119,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Eliminar Registro</button>
+        <button type="button" class="btn btn-primary" value="Borrar" id="btnBorrar" onclick="deleteEtapasLead()" data-dismiss="modal">Eliminar Registro</button>
       </div>
     </div>
   </div>
@@ -228,7 +234,7 @@
 // ------------------->
 
 saveEtapasLead = function(){
-        var nombreEtapa= $("#nombreEtapa1").val()
+        var nombreEtapa= $("#nombreEtapa").val()
         var descripcionEtapa = $("#descripcionEtapa").val();
         var orden = $("#orden").val(); 
         var activo = $("#activo").val(); 
@@ -269,7 +275,8 @@ loadInfoEtapasLead = function(idEtapaLead){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreEtapa1").val(data[0].nombreEtapa);
+                   $("#idEtapaLead").val(data[0].idEtapaLead);
+                   $("#nombreEtapa").val(data[0].nombreEtapa);
                    $("#descripcionEtapa").val(data[0].descripcionEtapa);
                    $("#orden").val(data[0].orden);
                    $("#activo").val(data[0].activo);

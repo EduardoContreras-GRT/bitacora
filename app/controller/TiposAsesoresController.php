@@ -14,8 +14,12 @@ $TiposAsesoresModel = new TiposAsesoresModel();
 
 switch($action){
 
-    case "insert":              
-        $dataArray = buildArray($_POST);      
+    case "insert": 
+        $dataArray = [
+            "nombreTipoAsesor" => $nombreTipoAsesor,
+            "activo" => "S" 
+       ];                   
+       // $dataArray = buildArray($_POST);      
         echo $TiposAsesoresModel->insertTiposAsesores($dataArray);        
     break;
     

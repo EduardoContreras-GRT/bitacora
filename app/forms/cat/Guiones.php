@@ -1,13 +1,20 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Plantillas- Guiones</h2>
         <p class="lead">Formas</p>
         <hr class="my-4">
         <form id= "guiones">
+
+        <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmGuiones" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+     </div>
             <!-- <input type="hidden" class="form-control" id="idPlantillaGuion" > -->
             <!-- <div class="form-group">
                 <label for="nombrePlantillaGuion">Nombre de Plantilla - Guión</label>
@@ -22,12 +29,12 @@
                 </select>
             </div>
             -->
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
                 <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchGuiones()">Buscar</button>
                 <button class="btn btn-primary btn-group-lg"  type="reset" >Limpiar</button>  -->
-                
+<!--                 
                 <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmGuiones">Agregar Registro</button>        
-            </div>
+            </div> -->
         </form>
     </div>
         <div class="col-lg-8" id="divDataTableGuiones">
@@ -102,7 +109,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Eliminar Registro</button>
+        <button type="button" class="btn btn-primary" alue="Borrar" id="btnBorrar" onclick="deleteGuiones()">Eliminar Registro</button>
       </div>
     </div>
   </div>
@@ -247,6 +254,7 @@ loadInfoGuiones = function(idPlantillaGuion){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
+                   $("#idPlantillaGuion").val(data[0].idPlantillaGuion);
                    $("#nombrePlantillaGuion").val(data[0].nombrePlantillaGuion);
                    $("#descripcion").val(data[0].descripcion);
                    $("#orden").val(data[0].orden);

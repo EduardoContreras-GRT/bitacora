@@ -107,7 +107,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <a href="#" onclick="changePage('EtapasLead','cat');">Etapas de Lead</a>
                             </li>
                             <li id="eta-seguimientos">
-                                <a href="#" onclick="changePage('EtapasSeguimientos','cat');">Etapas de Seguimientos</a>
+                                <a href="#" onclick="changePage('EtapasSeguimiento','cat');">Etapas de Seguimientos</a>
                             </li>
                             <li id="for-compra">
                                 <a href="#" onclick="changePage('FormaCompra','cat');">Forma de Compra</a>

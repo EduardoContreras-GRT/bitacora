@@ -1,18 +1,24 @@
 <?php
 //Aqui validar session
 ?>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="row">
     <div class="jumbotron col-lg-4" id="form">
         <h2 class="display-5">Temperaturas</h2>
         <p class="lead">tipo</p>
         <hr class="my-4">
         <form>
+        <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="modal" data-target="#modalFrmTemperaturas" role="tab" aria-controls="Agregar"> <i class="material-icons">dashboard</i>&nbsp&nbsp Nuevo Registro</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="TAKS 2"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 2</a>
+      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="TASK 3"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 3</a>
+      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="TASK 4"><i class="material-icons">dashboard</i>&nbsp&nbsp TASK 4</a>
+     </div>
             <!-- <input type="hidden" class="form-control" id="idTemperaturaLead" > -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="nombreTemperatura">Nombre</label>
-                <input type="text" class="form-control" id="nombreTemperatura" >
-            </div>
+                <input type="text" class="form-control" id="nombreTemperatura">
+            </div> -->
             <!--
             <div class="form-group">
                 <label for="activo">Activo</label>
@@ -22,12 +28,12 @@
                 </select>
             </div>
 -->
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchTemperaturas()">Buscar</button>
-                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button> 
-                <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmTemperaturas">Agregar</button>
+            <!-- <div class="btn-group" role="group" aria-label="Basic example"> -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" value="Buscar" id="btnBuscar" onclick="searchTemperaturas()">Buscar</button>
+                <button type="reset" class="btn btn-primary btn-group-lg">Limpiar</button>  -->
+                <!-- <button type="button" class="btn btn-dark btn-group-lg" data-toggle="modal" data-target="#modalFrmTemperaturas">Agregar</button> -->
                         
-            </div>
+            <!-- </div> -->
         </form>
     </div>
     <div class="col-lg-8" id="divDataTemperaturas">
@@ -49,8 +55,8 @@
                 <input type="hidden" value="" id="idTemperaturaLead">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <label for="nombreTemperatura1" class="form-control-label">Temperaturas</label>
-                        <input class="form-control" type="text" value="" id="nombreTemperatura1">
+                        <label for="nombreTemperatura" class="form-control-label">Temperaturas</label>
+                        <input class="form-control" type="text" value="" id="nombreTemperatura">
                     </div>
                     
                     <div class="col-lg-6 col-md-6">
@@ -191,7 +197,7 @@ searchTemperaturas = function(){
 // --------------------->
 
     saveTemperaturas = function(){
-        var nombreTemperatura = $("#nombreTemperatura1").val(); 
+        var nombreTemperatura = $("#nombreTemperatura").val(); 
         $.ajax({
                 method: "POST",
                 url: "controller/TemperaturaController.php",            
@@ -226,7 +232,8 @@ loadInfoTemperatura = function(idTemperaturaLead){
             if( result != "" ){               
                 if(result.status === "ok"){
                     data = result.data;
-                   $("#nombreTemperatura1").val(data[0].nombreTemperatura);
+                   $("#idTemperaturaLead").val(data[0].idTemperaturaLead);
+                   $("#nombreTemperatura").val(data[0].nombreTemperatura);
                    $("#activo").val(data[0].activo);
                     var btnCerrar  = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
                     var btnGuardar = '<button type="button" onclick="updateTemperatura()" class="btn btn-primary">Actualizar</button>';                               
@@ -240,7 +247,7 @@ loadInfoTemperatura = function(idTemperaturaLead){
 // -------------------------->
 updateTemperatura = function(){
         var idTemperaturaLead = $("#idTemperaturaLead").val();
-        var  nombreTemperatura = $("##nombreTemperatura1").val();
+        var  nombreTemperatura = $("##nombreTemperatura").val();
         var  activo = $("#activo").val();
        
 
@@ -268,8 +275,8 @@ updateTemperatura = function(){
 
    // --------------->
 deleteTemperatura = function(){
-        var idTemperaturaLead = $("#idTemperaturaLead").val();
-        var nombreTemperatura = $("#nombreTemperatura1").val();
+        var idTemperaturaLead = $("#idTemperaturaLead1").val();
+        var nombreTemperatura = $("#nombreTemperatura").val();
         var activo = $("#activo").val();
        
         $.ajax({
